@@ -1,0 +1,417 @@
+---
+
+# default role
+role: default
+
+# define the filebucket
+filebucket:
+  server: 'puppet.bardicgrove.org'
+  path: false
+
+# global puppet master server setting
+puppetserver: 'puppet.bardicgrove.org'
+
+# global (main) puppet settings
+puppet::main:
+  # force the path for puppet to also include the puppetlabs bin dirs
+  path: '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/opt/puppetlabs/bin:/opt/puppetlabs/puppet/bin'
+
+# The default is not to use the IPA CA
+
+ipacerts: false
+
+# NTP configuration
+# basic self only (aka client)
+ntp::servers:
+  - 'monitor.linux-foundation.org'
+ntp::restrict:
+  - '127.0.0.1'
+
+# default option tree for saz-ssh
+
+## sshd_config
+# sshd:
+#   storeconfigs_enabled: true
+#   options:
+#     ChallengeResponseAuthentication: 'no'
+#     X11Forwarding: 'yes'
+#     PrintMotd: 'no'
+#     AcceptEnv: 'LANG LC_*'
+#     Subsystem: "sftp ${sftp_server_path}"
+#     UsePAM: 'yes'
+
+
+## ssh_config
+# ssh:
+#   storeconfigs_enabled: true
+#   options:
+#     - 'Host *':
+#         SendEnv: 'LANG LC_*'
+#         HashKnownHosts: yes
+
+#  NOTE: ${sftp_server_path} resolves to the default for a given host OS
+
+# Set all unknown defaults and differing defaults
+#sshd:
+#  storeconfigs_enabled: false
+#  options:
+#    Protocol: 2
+#    Port:
+#      - 22
+#    PermitRootLogin: 'forced-commands-only'
+#    AuthorizedKeysFile: '.ssh/authorized_keys'
+#    PasswordAuthentication: 'no'
+#    GSSAPIAuthentication: 'yes'
+#    GSSAPICleanupCredentials: 'yes'
+#    AcceptEnv: 'LANG LC_* XMODIFIERS'
+
+ssh::server::storeconfigs_enabled: false
+ssh::server::options:
+  Protocol: 2
+  Port:
+    - 22
+  PermitRootLogin: 'forced-commands-only'
+  AuthorizedKeysFile: '.ssh/authorized_keys'
+  PasswordAuthentication: 'no'
+  GSSAPIAuthentication: 'no'
+  AcceptEnv: 'LANG LC_* XMODIFIERS'
+
+# configure to allow all users onto the system via pam which is the
+# normal system default
+pam::allowed_users: 'ALL'
+
+# Mail configuration
+# set configurerelay to false to not configure the default relay
+# if false then postfix::conf needs to be built up
+#configurerelay: true
+#
+## default relay configuration
+## default host is lf-smtp2 (IP: 172.17.192.36)
+##postfix::relay::relayhost: '[172.17.192.36]'
+#postfix::relay::sender_hostname: "%{::hostname}.bardicgrove.org"
+#postfix::relay::masquerade_domains: 'bardicgrove.org'
+#
+## Mail configuration
+## By default all systems are considered "satellite" meaning that they
+## relay their mail to another system that is configured as mta
+## NOTE: mta & satellite flags are mutually exclusive. One _must_ be set
+## to true and one _must_ be set to false or the postfix module isn't
+## going to work poperly
+## NOTE: a relayhost _must_ be defined. It must be defined as a proper
+## relay configuration _or_ the special keyword 'direct' which should in
+## general only be used on systems configured as mta
+#postfix::inet_interfaces: 'localhost'
+#postfix::mta: false
+#postfix::satellite: true
+#postfix::relayhost: '[172.17.192.36]'
+#postfix::root_mail_recipient: 'root@mail.bardicgrove.org'
+#
+## additional configs, systems may set their own and they will be merged
+## into this hash, as such, the aggregate of the hiera levels for this
+## hash will be used so if a key is currently being set that needs to be
+## unset please talk to agrimberg / tykeal about it
+#postfix::configs:
+#  'sender_hostname':
+#    value: "%{::hostname}.linuxfoundation.org"
+#  'masquerade_domains':
+#    value: 'linuxfoundation.org'
+
+# pin rsyslog -- module default is to always install latest but this can
+# have issues due to a) unexpected upgrades and b) problems with yum
+# when there is unexpected extraneous output from check-status
+rsyslog::package_status: '7.4.7-7.el7_0'
+
+# Do not manage auditd service because camptocamp/selinux module will conlict
+auditd::manage_service: false
+
+# Mcollective / rabbitmq defaults for puppet4
+#mcollective::manage_packages: false
+#mcollective::confdir: '/etc/puppetlabs/mcollective'
+#mcollective::core_libdir: '/opt/puppetlabs/mcollective/plugins'
+#mcollective::site_libdir: '/usr/local/libexec/mcollective/mcollective'
+#mcollective::connector: 'rabbitmq'
+#erlang::epel_enable: true
+#rabbitmq::version: '3.3.5-4'
+#rabbitmq::manage_repo: false
+#rabbitmq::package_provider: 'yum'
+
+# manage "common user" accounts
+# We would prefer not to do this but after researching what was going to
+# be needed to do this all cleanly from LDAP it was realized that until
+# we get our LDAP systems updated to something a little more modern and
+# flexible it's not going to happen in an easy manner.
+#
+# lfadmin has historically be uid 500 but EL7 starts user numbering at
+# 1000 and on a cloud-init enabled system the default cloud-init user
+# generally ends up at 500 causing collisions when the system is
+# attached to puppet
+users_common:
+  tmpadmin:
+    ensure: present
+    uid: 700
+    comment: Temporary Bootstrapping Admin
+    managehome: true
+    home: /home/tmpadmin
+    shell: /bin/bash
+    groups: wheel
+    password: ENC[GPG,hQEMA4i0Em3b1yILAQf6A/RsfgvleOUSaMWL0qcBmEAt95xPpKLvXLf56zmjdwMTJoaUlo6hv56JuMEq7zdP3AsREUajbmgtsnZ34lAqGVAZrYbeBkDvH9U/W8+tXhE3CTnjZh9HwObheYZ2Bw/4MX1yqKTV/5gJpJOxLbaL69oyK5JNL3+7AWCKzQr4NPYreSifxTniQ+4ySd7RU4D7Lck1KWyzUEPBbV9/bGDGuryRl7ZTVok6z+icokUI3GYGUPruRQ8T68KB0rtyFzcoqw5G4yLAM0Bc8kmdMskSUuauAJrJ046czSddoehP7fbLQMkBAd9KCjr1xQHnIaRG1EghipOB+LHhIsAs+QrDQdKlASk+rqbnhE+CyWnxfQ8tgj2vV6qvQnWhSNostbtK+/jWzynDPQh+ayi7b+P17LxmTOys0zpNZUW3MdgZinSjfkeV4JXB2mfAsm97RI8RiqBTnzxpyDMAVtlheUTCpOovnv7Ec3KxKTRyygT7yLfQGr59pe7FeLWAdYbs2voTXT4fvgqGk6fZUeeGr0e3Qu1aM/6PJajCmQ4aV7erAh6GpDEHoBZi]
+    ssh_authorized_keys:
+      tykeal@bardicgrove.org:
+        type: 'ssh-rsa'
+        key: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCv5BzD+/7hXdODNFHivSmVdOVr3nQaQPebRc/ebXdBPjgHxb3l+odx85H/0A5GnMbJUTBgiOSoRpr5WejV2H30qTg5SduEKvpetGpofg3C07w5VTdGRGguGT2m4jS06OmO/lgFaYzKGZZ+/Yu7VQmu5t2ZUqmTSp/fLYhYSQ9bulOmOHwnJHT4KSsrZaIZV+ERF/mooeaQyZwupZhwgrgdOkAX+Bcy50fNrI/EZJET+WmX0VJV0hCQd2kzOzrONb4JZuFMY0Ks+VvIbyJTyzCik4WRwUl/Jp+jp13SZhOngxe2V6O+cYlqtHqgmP5yI+KMadB6UMNZVdChLf6T+naB'
+
+# sysctl configuration
+# we want to purge any sysctl knob not managed by puppet
+sysctl::base::purge: true
+# allow us to do layered value overwrites
+sysctl::base::hiera_merge_values: true
+# NOTE: some of these values are _not_ the defaults on EL5-7
+sysctl::base::values:
+  kernel.sysrq:
+    value: 0
+  kernel.core_uses_pid:
+    value: 1
+  kernel.msgmnb:
+    value: 65536
+  kernel.msgmax:
+    value: 65536
+  kernel.shmall:
+    value: 4294967296
+  kernel.shmmax:
+    value: 68719476736
+  net.bridge.bridge-nf-call-ip6tables:
+    value: 0
+  net.bridge.bridge-nf-call-iptables:
+    value: 0
+  net.bridge.bridge-nf-call-arptables:
+    value: 0
+  net.ipv4.ip_forward:
+    value: 0
+  net.ipv4.conf.default.rp_filter:
+    value: 1
+  net.ipv4.conf.default.accept_source_route:
+    value: 0
+  net.ipv4.tcp_syncookies:
+    value: 1
+
+# rkhunter configuration
+# Please look over the params file
+# https://github.com/mmz-srf/puppet-rkhunter/blob/develop/manifests/params.pp
+# for information on the default settings. If you need to override / add
+# a whitelist entry you will need to fully specify the array of checks
+# in your higher level hiera
+#
+# The default for EL systems is unset, we want this as
+# forced-commands-only in our environment
+rkhunter::allow_ssh_root_user: 'forced-commands-only'
+
+# default resolv_conf setup (each $domain should set this in their
+# common.yaml) this is just a failsafe
+resolv_conf::nameservers:
+  - 10.0.0.1
+resolv_conf::options:
+  - 'timeout:2'
+resolv_conf::searchpath: "%{::domain}"
+
+#### MONITORING / nagios / nrpe
+# path to the nagios plugins for use as a lookup in nrpe
+nagios_plugin_dir: '/usr/lib64/nagios/plugins'
+
+nrpe::purge: true
+nrpe::recurse: true
+
+nrpe::commands:
+  'check_conntrack':
+    'command': "%{hiera('nagios_plugin_dir')}/check_conntrack -w 70 -c 90"
+  'check_home':
+    'command': "%{hiera('nagios_plugin_dir')}/check_disk -w 20% -c 5% -p /home"
+  'check_opt':
+    'command': "%{hiera('nagios_plugin_dir')}/check_disk -w 20% -c 10% -p /opt"
+  'check_puppet':
+    'command': "%{hiera('nagios_plugin_dir')}/check_file_age -w 3900 -c 604800 /opt/puppetlabs/puppet/cache/state/state.yaml"
+  'check_root':
+    'command': "%{hiera('nagios_plugin_dir')}/check_disk -w 15% -c 5% -p /"
+  'check_tmp':
+    'command': "%{hiera('nagios_plugin_dir')}/check_disk -w 25% -c 10% -p /tmp"
+  'check_srv':
+    'command': "%{hiera('nagios_plugin_dir')}/check_disk -w 15% -c 5% -p /srv"
+  'check_usr':
+    'command': "%{hiera('nagios_plugin_dir')}/check_disk -w 15% -c 10% -p /usr"
+  'check_var':
+    'command': "%{hiera('nagios_plugin_dir')}/check_disk -w 15% -c 5% -p /var"
+  'check_zombie_procs':
+    'command': "%{hiera('nagios_plugin_dir')}/check_procs -w 5 -c 10 -s Z"
+
+#### SSL CA information (certs should be done at the domain level to be
+# able to be dealt with decently using eyaml encryption)
+sslmgmt::ca:
+  comodo: |
+          -----BEGIN CERTIFICATE-----
+          MIIGCDCCA/CgAwIBAgIQKy5u6tl1NmwUim7bo3yMBzANBgkqhkiG9w0BAQwFADCB
+          hTELMAkGA1UEBhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4G
+          A1UEBxMHU2FsZm9yZDEaMBgGA1UEChMRQ09NT0RPIENBIExpbWl0ZWQxKzApBgNV
+          BAMTIkNPTU9ETyBSU0EgQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkwHhcNMTQwMjEy
+          MDAwMDAwWhcNMjkwMjExMjM1OTU5WjCBkDELMAkGA1UEBhMCR0IxGzAZBgNVBAgT
+          EkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4GA1UEBxMHU2FsZm9yZDEaMBgGA1UEChMR
+          Q09NT0RPIENBIExpbWl0ZWQxNjA0BgNVBAMTLUNPTU9ETyBSU0EgRG9tYWluIFZh
+          bGlkYXRpb24gU2VjdXJlIFNlcnZlciBDQTCCASIwDQYJKoZIhvcNAQEBBQADggEP
+          ADCCAQoCggEBAI7CAhnhoFmk6zg1jSz9AdDTScBkxwtiBUUWOqigwAwCfx3M28Sh
+          bXcDow+G+eMGnD4LgYqbSRutA776S9uMIO3Vzl5ljj4Nr0zCsLdFXlIvNN5IJGS0
+          Qa4Al/e+Z96e0HqnU4A7fK31llVvl0cKfIWLIpeNs4TgllfQcBhglo/uLQeTnaG6
+          ytHNe+nEKpooIZFNb5JPJaXyejXdJtxGpdCsWTWM/06RQ1A/WZMebFEh7lgUq/51
+          UHg+TLAchhP6a5i84DuUHoVS3AOTJBhuyydRReZw3iVDpA3hSqXttn7IzW3uLh0n
+          c13cRTCAquOyQQuvvUSH2rnlG51/ruWFgqUCAwEAAaOCAWUwggFhMB8GA1UdIwQY
+          MBaAFLuvfgI9+qbxPISOre44mOzZMjLUMB0GA1UdDgQWBBSQr2o6lFoL2JDqElZz
+          30O0Oija5zAOBgNVHQ8BAf8EBAMCAYYwEgYDVR0TAQH/BAgwBgEB/wIBADAdBgNV
+          HSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwGwYDVR0gBBQwEjAGBgRVHSAAMAgG
+          BmeBDAECATBMBgNVHR8ERTBDMEGgP6A9hjtodHRwOi8vY3JsLmNvbW9kb2NhLmNv
+          bS9DT01PRE9SU0FDZXJ0aWZpY2F0aW9uQXV0aG9yaXR5LmNybDBxBggrBgEFBQcB
+          AQRlMGMwOwYIKwYBBQUHMAKGL2h0dHA6Ly9jcnQuY29tb2RvY2EuY29tL0NPTU9E
+          T1JTQUFkZFRydXN0Q0EuY3J0MCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5jb21v
+          ZG9jYS5jb20wDQYJKoZIhvcNAQEMBQADggIBAE4rdk+SHGI2ibp3wScF9BzWRJ2p
+          mj6q1WZmAT7qSeaiNbz69t2Vjpk1mA42GHWx3d1Qcnyu3HeIzg/3kCDKo2cuH1Z/
+          e+FE6kKVxF0NAVBGFfKBiVlsit2M8RKhjTpCipj4SzR7JzsItG8kO3KdY3RYPBps
+          P0/HEZrIqPW1N+8QRcZs2eBelSaz662jue5/DJpmNXMyYE7l3YphLG5SEXdoltMY
+          dVEVABt0iN3hxzgEQyjpFv3ZBdRdRydg1vs4O2xyopT4Qhrf7W8GjEXCBgCq5Ojc
+          2bXhc3js9iPc0d1sjhqPpepUfJa3w/5Vjo1JXvxku88+vZbrac2/4EjxYoIQ5QxG
+          V/Iz2tDIY+3GH5QFlkoakdH368+PUq4NCNk+qKBR6cGHdNXJ93SrLlP7u3r7l+L4
+          HyaPs9Kg4DdbKDsx5Q5XLVq4rXmsXiBmGqW5prU5wfWYQ//u+aen/e7KJD2AFsQX
+          j4rBYKEMrltDR5FL1ZoXX/nUh8HCjLfn4g8wGTeGrODcQgPmlKidrv0PJFGUzpII
+          0fxQ8ANAe4hZ7Q7drNJ3gjTcBpUC2JD5Leo31Rpg0Gcg19hCC0Wvgmje3WYkN5Ap
+          lBlGGSW4gNfL1IYoakRwJiNiqZ+Gb7+6kHDSVneFeO/qJakXzlByjAA6quPbYzSf
+          +AZxAeKCINT+b72x
+          -----END CERTIFICATE-----
+          -----BEGIN CERTIFICATE-----
+          MIIFdDCCBFygAwIBAgIQJ2buVutJ846r13Ci/ITeIjANBgkqhkiG9w0BAQwFADBv
+          MQswCQYDVQQGEwJTRTEUMBIGA1UEChMLQWRkVHJ1c3QgQUIxJjAkBgNVBAsTHUFk
+          ZFRydXN0IEV4dGVybmFsIFRUUCBOZXR3b3JrMSIwIAYDVQQDExlBZGRUcnVzdCBF
+          eHRlcm5hbCBDQSBSb290MB4XDTAwMDUzMDEwNDgzOFoXDTIwMDUzMDEwNDgzOFow
+          gYUxCzAJBgNVBAYTAkdCMRswGQYDVQQIExJHcmVhdGVyIE1hbmNoZXN0ZXIxEDAO
+          BgNVBAcTB1NhbGZvcmQxGjAYBgNVBAoTEUNPTU9ETyBDQSBMaW1pdGVkMSswKQYD
+          VQQDEyJDT01PRE8gUlNBIENlcnRpZmljYXRpb24gQXV0aG9yaXR5MIICIjANBgkq
+          hkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAkehUktIKVrGsDSTdxc9EZ3SZKzejfSNw
+          AHG8U9/E+ioSj0t/EFa9n3Byt2F/yUsPF6c947AEYe7/EZfH9IY+Cvo+XPmT5jR6
+          2RRr55yzhaCCenavcZDX7P0N+pxs+t+wgvQUfvm+xKYvT3+Zf7X8Z0NyvQwA1onr
+          ayzT7Y+YHBSrfuXjbvzYqOSSJNpDa2K4Vf3qwbxstovzDo2a5JtsaZn4eEgwRdWt
+          4Q08RWD8MpZRJ7xnw8outmvqRsfHIKCxH2XeSAi6pE6p8oNGN4Tr6MyBSENnTnIq
+          m1y9TBsoilwie7SrmNnu4FGDwwlGTm0+mfqVF9p8M1dBPI1R7Qu2XK8sYxrfV8g/
+          vOldxJuvRZnio1oktLqpVj3Pb6r/SVi+8Kj/9Lit6Tf7urj0Czr56ENCHonYhMsT
+          8dm74YlguIwoVqwUHZwK53Hrzw7dPamWoUi9PPevtQ0iTMARgexWO/bTouJbt7IE
+          IlKVgJNp6I5MZfGRAy1wdALqi2cVKWlSArvX31BqVUa/oKMoYX9w0MOiqiwhqkfO
+          KJwGRXa/ghgntNWutMtQ5mv0TIZxMOmm3xaG4Nj/QN370EKIf6MzOi5cHkERgWPO
+          GHFrK+ymircxXDpqR+DDeVnWIBqv8mqYqnK8V0rSS527EPywTEHl7R09XiidnMy/
+          s1Hap0flhFMCAwEAAaOB9DCB8TAfBgNVHSMEGDAWgBStvZh6NLQm9/rEJlTvA73g
+          JMtUGjAdBgNVHQ4EFgQUu69+Aj36pvE8hI6t7jiY7NkyMtQwDgYDVR0PAQH/BAQD
+          AgGGMA8GA1UdEwEB/wQFMAMBAf8wEQYDVR0gBAowCDAGBgRVHSAAMEQGA1UdHwQ9
+          MDswOaA3oDWGM2h0dHA6Ly9jcmwudXNlcnRydXN0LmNvbS9BZGRUcnVzdEV4dGVy
+          bmFsQ0FSb290LmNybDA1BggrBgEFBQcBAQQpMCcwJQYIKwYBBQUHMAGGGWh0dHA6
+          Ly9vY3NwLnVzZXJ0cnVzdC5jb20wDQYJKoZIhvcNAQEMBQADggEBAGS/g/FfmoXQ
+          zbihKVcN6Fr30ek+8nYEbvFScLsePP9NDXRqzIGCJdPDoCpdTPW6i6FtxFQJdcfj
+          Jw5dhHk3QBN39bSsHNA7qxcS1u80GH4r6XnTq1dFDK8o+tDb5VCViLvfhVdpfZLY
+          Uspzgb8c8+a4bmYRBbMelC1/kZWSWfFMzqORcUx8Rww7Cxn2obFshj5cqsQugsv5
+          B5a6SE2Q8pTIqXOi6wZ7I53eovNNVZ96YUWYGGjHXkBrI/V5eu+MtWuLt29G9Hvx
+          PUsE2JOAWVrgQSQdso8VYFhH2+9uRv0V9dlfmrPb2LjkQLPNlzmuhbsdjrzch5vR
+          pu/xO28QOG8=
+          -----END CERTIFICATE-----
+  startcom_sub_class2: |
+                       -----BEGIN CERTIFICATE-----
+                       MIIGNDCCBBygAwIBAgIBGzANBgkqhkiG9w0BAQsFADB9MQswCQYDVQQGEwJJTDEW
+                       MBQGA1UEChMNU3RhcnRDb20gTHRkLjErMCkGA1UECxMiU2VjdXJlIERpZ2l0YWwg
+                       Q2VydGlmaWNhdGUgU2lnbmluZzEpMCcGA1UEAxMgU3RhcnRDb20gQ2VydGlmaWNh
+                       dGlvbiBBdXRob3JpdHkwHhcNMDcxMDI0MjA1NzA5WhcNMTcxMDI0MjA1NzA5WjCB
+                       jDELMAkGA1UEBhMCSUwxFjAUBgNVBAoTDVN0YXJ0Q29tIEx0ZC4xKzApBgNVBAsT
+                       IlNlY3VyZSBEaWdpdGFsIENlcnRpZmljYXRlIFNpZ25pbmcxODA2BgNVBAMTL1N0
+                       YXJ0Q29tIENsYXNzIDIgUHJpbWFyeSBJbnRlcm1lZGlhdGUgU2VydmVyIENBMIIB
+                       IjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4k85L6GMmoWtCA4IPlfyiAEh
+                       G5SpbOK426oZGEY6UqH1D/RujOqWjJaHeRNAUS8i8gyLhw9l33F0NENVsTUJm9m8
+                       H/rrQtCXQHK3Q5Y9upadXVACHJuRjZzArNe7LxfXyz6CnXPrB0KSss1ks3RVG7RL
+                       hiEs93iHMuAW5Nq9TJXqpAp+tgoNLorPVavD5d1Bik7mb2VsskDPF125w2oLJxGE
+                       d2H2wnztwI14FBiZgZl1Y7foU9O6YekO+qIw80aiuckfbIBaQKwn7UhHM7BUxkYa
+                       8zVhwQIpkFR+ZE3EMFICgtffziFuGJHXuKuMJxe18KMBL47SLoc6PbQpZ4rEAwID
+                       AQABo4IBrTCCAakwDwYDVR0TAQH/BAUwAwEB/zAOBgNVHQ8BAf8EBAMCAQYwHQYD
+                       VR0OBBYEFBHbI0X9VMxqcW+EigPXvvcBLyaGMB8GA1UdIwQYMBaAFE4L7xqkQFul
+                       F2mHMMo0aEPQQa7yMGYGCCsGAQUFBwEBBFowWDAnBggrBgEFBQcwAYYbaHR0cDov
+                       L29jc3Auc3RhcnRzc2wuY29tL2NhMC0GCCsGAQUFBzAChiFodHRwOi8vd3d3LnN0
+                       YXJ0c3NsLmNvbS9zZnNjYS5jcnQwWwYDVR0fBFQwUjAnoCWgI4YhaHR0cDovL3d3
+                       dy5zdGFydHNzbC5jb20vc2ZzY2EuY3JsMCegJaAjhiFodHRwOi8vY3JsLnN0YXJ0
+                       c3NsLmNvbS9zZnNjYS5jcmwwgYAGA1UdIAR5MHcwdQYLKwYBBAGBtTcBAgEwZjAu
+                       BggrBgEFBQcCARYiaHR0cDovL3d3dy5zdGFydHNzbC5jb20vcG9saWN5LnBkZjA0
+                       BggrBgEFBQcCARYoaHR0cDovL3d3dy5zdGFydHNzbC5jb20vaW50ZXJtZWRpYXRl
+                       LnBkZjANBgkqhkiG9w0BAQsFAAOCAgEAbQjxXHkqUPtUY+u8NEFcuKMDITfjvGkl
+                       LgrTuBW63grW+2AuDAZRo/066eNHs6QV4i5e4ujwPSR2dgggY7mOIIBmiDm2QRjF
+                       5CROq6zDlIdqlsFZICkuONDNFpFjaPtZRTmuK1n6gywQgCNSIrbzjPcwR/jL/wow
+                       bfwC9yGme1EeZRqvWy/HzFWacs7UMmWlRk6DTmpfPOPMJo5AxyTZCiCYQQeksV7x
+                       UAeY0kWa+y/FV+eerOPUl6yy4jRHTk7tCySxrciZwYbd6YNLmeIQoUAdRC3CH3nT
+                       B2/JYxltcgyGHMiPU3TtafZgLs8fvncv+wIF1YAF/OGqg8qmzoJ3ghM4upGdTMIu
+                       8vADdmuLC/+dnbzknxX6QEGlWA8zojLUxVhGNfIFoizu/V/DyvSvYuxzzIkPECK5
+                       gDoMoBTTMI/wnxXwulNPtfgF7/5AtDhA4GNAfB2SddxiNQAF7XkUHtMZ9ff3W6Xk
+                       FldOG+NlLFqsDBG/KLckyFK36gq+FqNFCbmtmtXBGB5L1fDIeYzcMKG6hFQxhHS0
+                       oqpdHhp2nWBfLlOnTNqIZNJzOH37OJE6Olk45LNFJtSrqIAZyCCfM6bQgoQvZuIa
+                       xs9SIp+63ZMk9TxEaQj/KteaOyfaPXI9778U7JElMTz3Bls62mslV2I1C/A73Zyq
+                       JZWQZ8NU4ds=
+                       -----END CERTIFICATE-----
+                       -----BEGIN CERTIFICATE-----
+                       MIIGnzCCBIegAwIBAgIBPTANBgkqhkiG9w0BAQsFADBTMQswCQYDVQQGEwJJTDEW
+                       MBQGA1UEChMNU3RhcnRDb20gTHRkLjEsMCoGA1UEAxMjU3RhcnRDb20gQ2VydGlm
+                       aWNhdGlvbiBBdXRob3JpdHkgRzIwHhcNMDYwOTE3MTk0NjM3WhcNMzYwOTE3MTk0
+                       NjM3WjB9MQswCQYDVQQGEwJJTDEWMBQGA1UEChMNU3RhcnRDb20gTHRkLjErMCkG
+                       A1UECxMiU2VjdXJlIERpZ2l0YWwgQ2VydGlmaWNhdGUgU2lnbmluZzEpMCcGA1UE
+                       AxMgU3RhcnRDb20gQ2VydGlmaWNhdGlvbiBBdXRob3JpdHkwggIiMA0GCSqGSIb3
+                       DQEBAQUAA4ICDwAwggIKAoICAQDBiNsJvGxGfHiflXu1M5DycmLWwTYgIiRezul3
+                       8kMKogZkpMyONvg45iPwbm2xPN1yo4UcodM9tDMr0y+v/uqwQVlntsQGfQqedIXW
+                       eUyAN3rfOQVSWff0G0ZDpNKFhdLDcfN1YjS6LIp/Ho/u7TTQEceWzVI9ujPW3U3e
+                       CztKS5/CJi/6tRYccjV3yjxd5srhJosaNnZcAdt0FCX+7bWgiA/deMotHweXMAEt
+                       cnn6RtYTKqi5pquDSR3l8u/d5AGOGAqPY1MWhWKpDhk6zLVmpsJrdAfkK+F2PrRt
+                       2PZE4XNiHzvEvqBTViVsUQn3qqvKv3b9bZvzndu/PWa8DFaqr5hIlTpL36dYUNk4
+                       dalb6kMMAv+Z6+hsTXBbKWWc3apdzK8BMewM69KN6Oqce+Zu9ydmDBpI125C4z/e
+                       IT574Q1w+2OqqGwaVLRcJXrJosmLFqa7LH4XXgVNWG4SHQHuEhANxjJ/GP/89PrN
+                       bpHoNkm+Gkhpi8KWTRoSsmkXwQqQ1vp5Iki/untp+HDH+no32NgN0nZPV/+Qt+OR
+                       0t3vwmC3Zzrd/qqc8NSLf3Iizsafl7b4r4qgEKjZ+xjGtrVcUjyJthkqcwEKDwOz
+                       EmDyei+B26Nu/yYwl/WL3YlXtq09s68rxbd2AvCl1iuahhQqcvbjM4xdCUsT37uM
+                       dBNSSwIDAQABo4IBUjCCAU4wEgYDVR0TAQH/BAgwBgEB/wIBAjAOBgNVHQ8BAf8E
+                       BAMCAQYwHQYDVR0OBBYEFE4L7xqkQFulF2mHMMo0aEPQQa7yMB8GA1UdIwQYMBaA
+                       FEvFtEBrrRyzpRxlbkY2iYcFDA62MG8GCCsGAQUFBwEBBGMwYTAqBggrBgEFBQcw
+                       AYYeaHR0cDovL29jc3Auc3RhcnRzc2wuY29tL2NhLWcyMDMGCCsGAQUFBzAChido
+                       dHRwOi8vYWlhLnN0YXJ0c3NsLmNvbS9jZXJ0cy9jYS1nMi5jZXIwMgYDVR0fBCsw
+                       KTAnoCWgI4YhaHR0cDovL2NybC5zdGFydHNzbC5jb20vY2EtZzIuY3JsMEMGA1Ud
+                       IAQ8MDowOAYEVR0gADAwMC4GCCsGAQUFBwIBFiJodHRwOi8vd3d3LnN0YXJ0c3Ns
+                       LmNvbS9wb2xpY3kucGRmMA0GCSqGSIb3DQEBCwUAA4ICAQAznlPLrlQsAomwlVYG
+                       grRHeXCXSA8K0E03a1VfCE8uhgRZg7cK3N2oEojBMoeL4VqLOeuqcd3z+xSq85ux
+                       nzPc+cABbiRb4guyQvK/dqzWjjmDcEYVk0ozCqWiBk+ec4W4HmgykQHdvhY+8zgJ
+                       SCQdfqGkhAUc1/U/iE5jAIvc3M77nFeJ6KIe3VanEBDstFzlQhJSo8pSzhL8pEYB
+                       WpudHanbFogZDJwG+GC6pE8PSnIEAHmLKXwoReSr6xoHpUDrMdwChth00gRYCz45
+                       AOrkTylIrIl8ElzzXbtjBrCFMKIctmcxXE0sVc2YT9OCCUL+m7/LKPNdXopGbe8D
+                       WL6HmFUwGLwdt8t5WzXVSxS3xAA7F6DMz05wNT68Jfdf8BlJyQ3HRiTv/T20BbNS
+                       qSVsOWspIyuaPhLR1/Sv2m4PerB5lJYA6/U/eFZ1ot8ge53XOIoPfD99LG9Sed4n
+                       F822o/dHSXAZ8X+ootoBX5tiA+9hfGqfV/JusYcv+hc7SqRdzYTbcs6si+EhRs1h
+                       KWLiufNoQMHP+lcopOUlt3Ip/p6WDZNJOJq46LgvDFj7cQ/WSkMuzA5fp6NPvjQn
+                       VmojjUTsadpRN4hbnajrO7rjJhOJBN3kcd41za7ZQ9lh429y8y5TbJWYJ4EblH4r
+                       iQVKEQgyg4mqmCOllyMYS7CGGQ==
+                       -----END CERTIFICATE-----
+  geotrust: |
+            -----BEGIN CERTIFICATE-----
+            MIIERDCCAyygAwIBAgIDAjp4MA0GCSqGSIb3DQEBCwUAMEIxCzAJBgNVBAYTAlVT
+            MRYwFAYDVQQKEw1HZW9UcnVzdCBJbmMuMRswGQYDVQQDExJHZW9UcnVzdCBHbG9i
+            YWwgQ0EwHhcNMTQwODI5MjIyNDU4WhcNMjIwNTIwMjIyNDU4WjBmMQswCQYDVQQG
+            EwJVUzEWMBQGA1UEChMNR2VvVHJ1c3QgSW5jLjEdMBsGA1UECxMURG9tYWluIFZh
+            bGlkYXRlZCBTU0wxIDAeBgNVBAMTF0dlb1RydXN0IERWIFNTTCBDQSAtIEc0MIIB
+            IjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA30GUetr35DFDtuoBG1zOY+r6
+            baPZau4tmnX51ZxbvTTf2BzJbdgEiNputbe18DCuQNZd+sRTwdQinQROEaaV1UV8
+            QQVY4Ezd+e5VvV9G3K0TCJ0s5PeC5gcrng6MNKHOxKHggXCGAAY/Lep8myiuGyiL
+            OQnT5/BFpLG6EWeQVXuP3u04XKHh44PEw3KRT5juHMKAqmSlPoNiHMzgnvhawBMS
+            faKni6PnnyrXm8rL7ZcBnCiEUQRQQby0/HjpG88U6h8P/C4BMo22NcsKGDvsWj48
+            G9OZQx4v973zWxK5B17tPtGph8x3cifU2XWiY0uTNr3lXNe/X3kNszKnC7JjIwID
+            AQABo4IBHTCCARkwHwYDVR0jBBgwFoAUwHqYaI2J+6sFZAwRfap9ZbjKzE4wHQYD
+            VR0OBBYEFAtQ7HfvKpv/7AOhCv+txuQqGMc+MBIGA1UdEwEB/wQIMAYBAf8CAQAw
+            DgYDVR0PAQH/BAQDAgEGMDUGA1UdHwQuMCwwKqAooCaGJGh0dHA6Ly9nLnN5bWNi
+            LmNvbS9jcmxzL2d0Z2xvYmFsLmNybDAuBggrBgEFBQcBAQQiMCAwHgYIKwYBBQUH
+            MAGGEmh0dHA6Ly9nLnN5bWNkLmNvbTBMBgNVHSAERTBDMEEGCmCGSAGG+EUBBzYw
+            MzAxBggrBgEFBQcCARYlaHR0cDovL3d3dy5nZW90cnVzdC5jb20vcmVzb3VyY2Vz
+            L2NwczANBgkqhkiG9w0BAQsFAAOCAQEAMyTVkKopDDW5L8PHQpPAxhBLAwh2hBCi
+            4OdTEifyCtp/Otz9XHlajxd0Q1Ox1dFdWbmmhGTK8ToKWZYQv6mBV4tch9x/4+S7
+            BXqgMgkTThCBKB+cA2K89AG1KYNGB7nnuF3I6dHdrTv4NNvB0ZWpkRjtPCw3EU3M
+            /lM+UEP5w1ZBrFObbAWymuLgWVcwMrYmThMlzfpIcA91VWAR9TvVXlo8i1sPD2JC
+            SGGFixD0wYi/f1+KwtfNK5RcHzRKCK/rromoSHVVlR27wJoBufQDIj7U5lIwDWe5
+            wJH9LUwwjr2MpQSRu6Srfw/Yb/BmAMmjXPWwj4PmnFrmtrnFvL7kAg==
+            -----END CERTIFICATE-----
+# vim: ts=2 sw=2 sts=2 et :
