@@ -1,0 +1,52 @@
+---
+
+role: puppetserver
+
+r10k::version: present
+r10k::sources:
+  puppet:
+    remote: https://github.com/tykeal/puppetserver-main.git
+    basedir: /etc/puppetlabs/code/environments
+    prefix: false
+  hiera:
+    remote: https://github.com/tykeal/puppetserver-hiera.git
+    basedir: /etc/puppetlabs/code/hieradata
+    prefix: false
+r10k::manage_modulePath: false
+
+# if puppetdb::master::config::puppetdb_server is not set it defaults to
+# localhost
+#puppetdb::master::config::puppetdb_server: 'guardian.bardicgrove.org'
+
+# change the puppet_service_name to puppetserver for new
+# clojure based puppetserver
+# do not change if using the webbrick puppet-master (testing only)
+puppetdb::master::config::puppet_service_name: 'puppetserver'
+
+# configure puppet master settings here
+puppet::master:
+  reports: 'store,puppetdb'
+
+# rkhunter file override. We need to allow /dev/shm/PostgreSQL.* which
+# also means we have to define the full set of allowdevfile that the
+# rkhunter module normally sets for us
+#
+# NOTE: This is only needed because we're not using the upstream
+# PostgreSQL but the project upstream one since PuppetDB needs a newer
+# version than RHEL / EPEL has for EL7
+rkhunter::allowdevfile:
+  - '/dev/shm/pulse-shm-*'
+  - '/dev/md/md-device-map'
+  - '/dev/shm/mono.*'
+  - '/dev/shm/libv4l-*'
+  - '/dev/shm/spice.*'
+  - '/dev/.mdadm.map'
+  - '/dev/.udev/queue.bin'
+  - '/dev/.udev/db/*'
+  - '/dev/.udev/rules.d/99-root.rules'
+  - '/dev/.udev/uevent_seqnum'
+  - '/dev/md/autorebuild.pid'
+  - '/dev/shm/sem.slapd-*.stats'
+  - '/dev/shm/PostgreSQL.*'
+
+# vim: ts=2 sw=2 sts=2 et :
