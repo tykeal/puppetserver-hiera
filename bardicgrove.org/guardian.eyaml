@@ -27,6 +27,13 @@ puppetdb::master::config::puppet_service_name: 'puppetserver'
 puppet::master:
   reports: 'store,puppetdb'
 
+# configure tagmail
+tagmail::conf:
+  transport:
+    reportfrom: 'puppet@bardicgrove.org'
+  tagmap:
+    - all: 'grimbeaj@gmail.com'
+
 # rkhunter file override. We need to allow /dev/shm/PostgreSQL.* which
 # also means we have to define the full set of allowdevfile that the
 # rkhunter module normally sets for us
