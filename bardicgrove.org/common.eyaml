@@ -1,0 +1,8 @@
+---
+
+# sudo config for domain
+sudo::configs:
+  wheel:
+    content: '%wheel ALL=(ALL) ALL'
+
+# vim: sw=2 ts=2 sts=2 et :
