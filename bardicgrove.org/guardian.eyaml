@@ -1,6 +1,6 @@
 ---
 
-role: puppetserver
+role: role::puppetserver
 
 r10k::version: present
 r10k::sources:
