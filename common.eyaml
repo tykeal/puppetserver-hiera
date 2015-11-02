@@ -5,11 +5,11 @@ role: default
 
 # define the filebucket
 filebucket:
-  server: 'puppet.bardicgrove.org'
+  server: 'guardian.bardicgrove.org'
   path: false
 
 # global puppet master server setting
-puppetserver: 'puppet.bardicgrove.org'
+puppetserver: 'guardian.bardicgrove.org'
 
 # global (main) puppet settings
 puppet::main:
