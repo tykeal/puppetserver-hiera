@@ -208,7 +208,7 @@ rkhunter::allow_ssh_root_user: 'forced-commands-only'
 # default resolv_conf setup (each $domain should set this in their
 # common.yaml) this is just a failsafe
 resolv_conf::nameservers:
-  - 10.0.0.1
+  - 10.10.0.1
 resolv_conf::options:
   - 'timeout:2'
 resolv_conf::searchpath: "%{::domain}"
