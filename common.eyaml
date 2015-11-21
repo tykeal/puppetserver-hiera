@@ -119,7 +119,7 @@ pam::allowed_users: 'ALL'
 # pin rsyslog -- module default is to always install latest but this can
 # have issues due to a) unexpected upgrades and b) problems with yum
 # when there is unexpected extraneous output from check-status
-rsyslog::package_status: '7.4.7-7.el7_0'
+rsyslog::package_status: 'installed'
 
 # Do not manage auditd service because camptocamp/selinux module will conlict
 auditd::manage_service: false
