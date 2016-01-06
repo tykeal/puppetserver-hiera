@@ -27,7 +27,7 @@ sudo::configs:
 users_common:
   tykeal:
     ensure: present
-    uid: 700
+    uid: 701
     comment: Andrew Grimberg
     managehome: true
     home: /home/tykeal
