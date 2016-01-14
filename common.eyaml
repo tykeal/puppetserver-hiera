@@ -76,6 +76,24 @@ ssh::server::options:
   GSSAPIAuthentication: 'no'
   AcceptEnv: 'LANG LC_* XMODIFIERS'
 
+# global ssh client options (ssh/ssh_config)
+#
+# RH defaults are:
+# Host *
+#   GSSAPIAuthentication yes
+#   ForwardX11Trusted yes
+#   SendEnv LANG LC_CTYPE LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_MESSAGES
+#   SendEnv LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT
+#   SendEnv LC_IDENTIFICATION LC_ALL LANGUAGE
+#   SendEnv XMODIFIERS
+ssh::client_options:
+  'Host *':
+    SendEnv: 'LANG LC_*'
+    ForwardX11Trusted: 'no'
+    GSSAPIAuthentication: 'no'
+    ServerAliveInterval: '10'
+    UseRoaming: 'no'
+
 # configure to allow all users onto the system via pam which is the
 # normal system default
 pam::allowed_users: 'ALL'
