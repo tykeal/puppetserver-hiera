@@ -76,6 +76,20 @@ ssh::server::options:
   GSSAPIAuthentication: 'no'
   AcceptEnv: 'LANG LC_* XMODIFIERS'
 
+# Migrate to just using module ssh base interface instead of directected
+# server / client
+
+ssh::storeconfigs_enabled: false
+ssh::server_options:
+  Protocol: 2
+  Port:
+    - 22
+  PermitRootLogin: 'forced-commands-only'
+  AuthorizedKeysFile: '.ssh/authorized_keys'
+  PasswordAuthentication: 'no'
+  GSSAPIAuthentication: 'no'
+  AcceptEnv: 'LANG LC_* XMODIFIERS'
+
 # global ssh client options (ssh/ssh_config)
 #
 # RH defaults are:
@@ -93,6 +107,7 @@ ssh::client_options:
     GSSAPIAuthentication: 'no'
     ServerAliveInterval: '10'
     UseRoaming: 'no'
+
 
 # configure to allow all users onto the system via pam which is the
 # normal system default
