@@ -31,11 +31,11 @@ gerrit::override_options:
     interval: '2 day'
   gerrit:
     basePath: '/srv/gerrit'
-    canonicalWebUrl: 'http://gerrit.home.bardicgrove.org/r'
+    canonicalWebUrl: 'http://gerrit.home.bardicgrove.org'
   gitweb:
     cgi: '/var/www/git/gitweb.cgi'
   httpd:
-    listenUrl: 'http://*:80/r'
+    listenUrl: 'http://*:8080'
     maxQueued: '200'
   sendemail:
     smtpServer: 'localhost'
