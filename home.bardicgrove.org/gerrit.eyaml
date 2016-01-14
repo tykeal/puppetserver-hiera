@@ -16,7 +16,7 @@ gerrit::gerrit_version: '2.12'
 
 gerrit::override_options:
   auth:
-    type: 'OPENID'
+    type: 'OAUTH'
   cache:
     directory: 'cache'
   cache.web_sessions:
@@ -31,7 +31,7 @@ gerrit::override_options:
     interval: '2 day'
   gerrit:
     basePath: '/srv/gerrit'
-    canonicalWebUrl: 'http://gerrit.home.bardicgrove.org'
+    canonicalWebUrl: 'http://gerrit.home.bardicgrove.org:8080'
   gitweb:
     cgi: '/var/www/git/gitweb.cgi'
   httpd:
@@ -46,10 +46,16 @@ gerrit::override_options:
     email: 'gerrit@gerrit.home.bardicgrove.org'
   receive:
     enableSignedPush: 'false'
+  plugin.gerrit-oauth-provider-github-oauth:
+    client-id: ENC[GPG,hQEMA4i0Em3b1yILAQf9ElVl+jf6bw1brMlkLkQDd7ROCOQ8hn3UI4xIgRv7W9w3o2vsvS1kWXHvJAqE0xGNtCPLvZPXhWUTdhSnYVJS2KNYcPjE/1LqpPQaWTiSUNJgADe3JpqARuSsSZ1E+aqrCPmwDfpL25NXjWa5xNLYCVYLfWWlwORwqDOfLk3yxoL/C4Eu91wwV1Kwu35Q+AFt6J/i8F2iXBRu5bxT3b+6Uv8wqQ9sA/eICXmeHgD03hXIdO3mJLTxDu+R+pZt0jMwy10kOJTuK/h4huAG8zqCaT0YronPptZIlBZN3FlE1rJjkIV630xH1IfvkPdryeo2QKaoJNhsQgccq80Fmrv+DYUCDAOVosJoWKQPaQEP/1iy3T0eLz1Q02h5X0iEHkKn1q0HyFKzU9+HHTPe/4XuFHrO01kdU+eZAPk5sEpJ2w1K/pHrrFppiA6KJlwi46HUh/SdrT6/f6cwf9CBLdhCwVrPVbbeeDe/Xo/ddoPmhDcOfMT8ywRIOwXmGonVAWmGbNQk2UePha46RbShjQnhJjEflIPkXVwNq6lC4VK5osnj6Juzoimgm4xWJu3mv4KuYi9O0uriYRRph4/mVH/MbRSRmNQJnnPT5gsVCbsEHLvHlegDXo8FHPpaxuoFR7ACgE9YMt3wCqpGWK5cIhbIFcfwJ/5XqDYCCBvcQjAyLN73SYQHrNHTl66N5PibNefVQdGH02ck2Mzskf4IGMqEcQ4CNKKGy0473zW7qOUHR1nwufyWEGF7PVOuv0HJigRZ4/HsY5GCqvSO1ejdlkaEgTj5w8dgpt2Jv2V5TjMCglVPHUiYeemoI2WMolS9JFub/GVTVSc9vBy3/oWTeld57Smr+vm4bucR7+9tn2MhcfgHPTDm+BTdS41ePUda5eUX9/+AXDfqxgO/2bONP83Ss1OzzVdGGj3gSSs9JY/LkH6MwlH+FqO6RDzcS2Zdsihzf7ecetuQT/q9FLOqGThlqNN/dHfcDpN2ysfvLl2F4liEF02XHcgIGzd8hO2LJVUn3w60TOB9wUReWnu76jp50k8BOYnCStWjy+/NR+uKx3i/bELMezWcX2fieFjivma1nciZsmKviT0oydPpDaZ92ypMP3szU5jnXYNQ7SkywubTG8AoarGkh7NA8GyJ0IiO]
+    client-secret: ENC[GPG,hQEMA4i0Em3b1yILAQf/c85gQMbsQnap7nMHdj4lGv37VfAyQc4x4VtIND8k5NGvKG5jzeA7EZ1x4rVagNAq5hn6/LGPN2oUeyc4FNt1VumgI+D/dqapS8JwSgljxVaK6Pv5WIrPxYMt20Cff45tlwH76qSa46Nk0CV/deNf9W1sNoFKXEA8CE8tftLe1h1E0C142js4NU6ABLm/mHc3+bNOg4BIdJhRN/t9N985NrIKb8inQlrf5jEfOJcci3deojG920fjhdRYuF5igSzvWbD+v6c+6XlHUcVSiRn61wiwZEHodBQFQYB2VhvJdWb+lc8yx/EIF/f7xcK0r28Msq9UpS3pD42uC7Mga9hzcYUCDAOVosJoWKQPaQEP/19dj9OTEKXp200elptjGWg1iZ5QVHlWQDpyUnVPgAcFetSr18UOuhK9iwpUKrZAsXxa/Q/Oi7CvRxr178SHEF4zcd8/s/LZv0UHN7xwJyjsG/Xoj2YttYT0ytYUEPkzsnW36lRmv95vad5sCI5DCEONDg7ueIw5E4VrfGLEXE3QYkE3ALRXDzA+XdyfU8N9Q+NuLnSDZLoRQhk9NDcZ8/Yr6wKP1QIcQdMcih1rRhsIVLni0QYQDDU0d2N9FGdXQM66iNhrpgU+6UnKOY/CHqbRiTGbYK0gqod1mNrTghaIdMw5ZcSHp6pXGHh7B8FjXDtM56scabcX04UXSRtBFBZEYcjRJ6PuMJTNchrlTHC+QygLHFB1VQ9U3fu2DZ6A7lL7n5PBRem1qlO00Mn5oL5ZG4KScZMDHikZSWbqf5F8ZyZZzsztkVhmgECWNb7wJpQoOP7GegFbrB8M3TzpdlGvPn+AJKXFq4IxuN3ZS3ZCsOO9f03/si4SB65KDegG7CpZlcWBqNYN2YXVlT99Zp9SQMR/HJQ1lMzFH42iQNv0x63Jbfp6KNHaLZz/t2icNgO7U3ewHLyvdQR1b/RwZltGqgzP3oc9dd+aOkDyflwaSUT4Oj2dTRFe/4MACaX/Zs40C8qRgbWjejeIBKdWZdgLHWOnyNZXMGYw+RPPycUy0mMBayvp/n+6vqNX+73g6N0aFA0XsbTqGWqdW23K36cqoUHd3JXBFa/0mAoug7/exyvAqXSHbaC6nR+mL3nMEmkKizhA84xvVExxjipm1cvqNwEaeMHdvtPKPfwuN1Ep1YzZltY=]
+    callback: 'http://gerrit.home.bardicgrove.org:8080/oauth'
 
 gerrit::third_party_plugins:
   delete-project:
     plugin_source: 'https://gerrit-ci.gerritforge.com/view/Plugins-stable-2.11/job/plugin-delete-project-stable-2.11/lastSuccessfulBuild/artifact/buck-out/gen/plugins/delete-project/delete-project.jar'
+  gerrit-oath-provider:
+    plugin_source: 'https://github.com/davido/gerrit-oauth-provider/releases/download/v2.11.3/gerrit-oauth-provider.jar'
 
 gerrit::override_secure_options:
   database:
