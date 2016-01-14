@@ -44,6 +44,8 @@ gerrit::override_options:
     listenAddress: '*:29418'
   user:
     email: 'gerrit@gerrit.home.bardicgrove.org'
+  receive:
+    enableSignedPush: 'false'
 
 gerrit::third_party_plugins:
   delete-project:
