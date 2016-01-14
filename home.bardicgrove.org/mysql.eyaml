@@ -1,0 +1,50 @@
+---
+
+role: role::mysqlserver
+
+# ::mysql::server configuration
+mysql::server::root_password: ENC[GPG,hQEMA4i0Em3b1yILAQf9FHdnsVVHw/wlu/Sf3/Qsw34J3dP9QejsP48Si3V2+d6oZ3nGVfvIt08gE1zUAzNOt/kXpKf2SBLA1HYfKF10NjEubUVHHeg7y2Ld8G0kqxy7zVY243A6Z3IU6VumCOLKevMefibWKXMl00z+exsbC0tYM1nfB2KsGkIanKVDQ1sn/ceJ92VnrelVCP4Y9KlbDuCQhdH/Pi+OojKkVzGfnyRQCf9ijORm/ESN7UO2PEpDmCPflSEfCLYhLa9RPRvMS4M7bHM/Kim+mGd6WfcVoDFGiAzvEYxo6VTXoDxISD40Y1ApibTmEzjy4pK3a7RE4a8Nde+VO6FrVdlVZRCZIoUCDAOVosJoWKQPaQEQALGjtv8oEuyXNWZLT0r5H9hKN0xl7WKV7qAuWlqT9iVG+mqS1m+AtkiuMv0i777MCGRvZh7kRwDGxGbcLM2DhE9/AKToc1todAt6G5G8skV9rvuaDMNuDOKykY8ODfeHJGv3qdtEnRC5/z79yvFQ+bswQzIxtq/88BQfOwY3tA4KI+DxChhs/D0SMN7n3dGQHi48fe55BDOmZHz0p77jIbcoUx+IZQVvZRH1w7E03+7VbbfjSsVXOO3BHsv891Jer3xr/EubvnS86qikHDAL6RpTh8obN7MHyvXsl/01EexNLHRFtU5zyMwTO0p+GcQi3Yos4xe263A9ZiO/++lwELfkhWEXFkLbvMjmjL5JXqJrfwnnq7pXIom5TQltbGU5lPsUwOKAkcOvvcNSODVyCRC+i/RdguyIOLj271fLT9KLqnV4AoDk70lmqN4dXYmggEQF62XVWXzaaN85NAvIPuMfAcIyRTyvgBhSWyz3UuJPc2MmobKSsmwV44bdNfAxo2X9UUCYD+mZi+BXmw5BhA21DOGZFLHq05Gs1jlg/usN1ftW32fkTUJsu1zCVT0JTMpAaMxnUk6Wr+ycC9fAiSfH9bGg26cIunbZkiVL0hpaT0/Po5/IbZJTYalYleSoyM6uy4/FWoQj9RA3qvJ9pCS0omsjWV3V5O3CmlcbuuEM0lsBe8AVoHzS0SG7GhvxezA1zGQ6PnNa4Wc00jWmpb3MqdSPxu2njhzC9NWDM+U6tkUq0uszagyltBCnPiTsiWLiqBt/T3F7XGRqPRH/UapK8pomrV0gAL27C6OQ]
+mysql::server::service_enabled: true
+mysql::server::service_manage: true
+
+# we don't want the default accounts
+mysql::server::remove_default_accounts: true
+
+# specific options we want set that are different from default
+mysql::server::override_options:
+  mysqld:
+    bind-address: '0.0.0.0'
+    binlog_format: 'MIXED'
+    default-storage-engine: 'innodb'
+    innodb_additional_mem_pool_size: '20M'
+    innodb_log_file_size: '512M'
+    innodb_log_buffer_size: '8M'
+    key_buffer_size: '4G'
+    log-bin: 'binlog'
+    log_queries_not_using_indexes: 1
+    long_query_time: 1
+    log_warnings: 2
+    max_allowed_packet: '500M'
+    max_connections: 1000
+    max_heap_table_size: '128M'
+    max_user_connections: 150
+    query_cache_size: '128M'
+    query_cache_type: 1
+    read_buffer_size: '8M'
+    slow_query_log: 1
+    sort_buffer_size: '32M'
+    symbolic-links: 0
+    sync_binlog: 1
+    table_open_cache: 2048
+    thread_cache_size: 128
+    thread_concurrency: 4
+    tmp_table_size: '32M'
+  mysqldump:
+    max_allowed_packet: '500M'
+
+
+# This is a special internal tag we'll use for doing resource collection
+# from other systems when they do an export of options
+mysql::resourcetag: 'bardichome-db'
+
+# vim: ts=2 sw=2 sts=2 et :
