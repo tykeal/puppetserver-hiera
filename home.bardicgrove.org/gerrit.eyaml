@@ -1,0 +1,56 @@
+---
+
+role: role::gerrit
+
+# The resource collection tag to be used by our nginx system(s)
+nginx::exporttag: 'bardichome-nginx'
+
+# nginx SSL information
+nginx::ssl_cert_name: 'bardicgrove'
+nginx::ssl_cert_chain: 'startcom_sub_class2'
+nginx::ssl_dhparam: 'gerrit2kdhparam'
+
+# what mysql db do we want to pick us up
+gerrit::db_tag: 'bardichome-db'
+gerrit::gerrit_version: '2.12'
+
+gerrit::override_options:
+  auth:
+    type: 'OPENID'
+  cache:
+    directory: 'cache'
+  cache.web_sessions:
+    maxAge: '1mon'
+  database:
+    type: 'MYSQL'
+    hostname: 'mysql.home.bardicgrove.org'
+    database: 'gerrit'
+    username: 'gerrit'
+  gc:
+    startTime: 'Sun 03:15'
+    interval: '2 day'
+  gerrit:
+    basePath: '/srv/gerrit'
+    canonicalWebUrl: 'http://gerrit.home.bardicgrove.org/r'
+  gitweb:
+    cgi: '/var/www/git/gitweb.cgi'
+  httpd:
+    listenUrl: 'http://*:80/r'
+    maxQueued: '200'
+  sendemail:
+    smtpServer: 'localhost'
+    from: '${user} (Code Review) <gerrit@gerrit.home.bardicgrove.org>'
+  sshd:
+    listenAddress: '*:29418'
+  user:
+    email: 'gerrit@gerrit.home.bardicgrove.org'
+
+gerrit::third_party_plugins:
+  delete-project:
+    plugin_source: 'https://gerrit-ci.gerritforge.com/view/Plugins-stable-2.11/job/plugin-delete-project-stable-2.11/lastSuccessfulBuild/artifact/buck-out/gen/plugins/delete-project/delete-project.jar'
+
+gerrit::override_secure_options:
+  database:
+    password: ENC[GPG,hQEMA4i0Em3b1yILAQf+PN3b9LI54dfRLfmQxOznFsIUjWNxBQP2EzAJpz9fQMeOfOXW2pCKqI7FaGnOBxRk8RA9opWmTlQU8SxnKzhp6xVezgjR+VgrarBdEw/4WIwAwqd8nETeKZp7ioYSKHMg7X5J6lzc4Yn5VncUU3Z4OsnQpkt2X7kgb1+oC5aEHkZHx7uVp2t7Bhc8PMIHmt6qJ8hWMxI0EWWyWKqgINvtv8Jj/q5musWUlYxElqbI5xtpU74jYwSDjJu8hwcPsd2Xx5VD6N0nn6cWq4IcCaoii/8G6x5lgqOjLPQRHLJR0E0r150YPfubAD7eg824naBL8p0FScpkiEoUNREeDRxYLYUCDAOVosJoWKQPaQEP/0WGEqFarrY862f5sMurRRNQPgAB1HV3JOf7kAPOLy/FZfZ1nystjtE0Bb/jUOFuM8UO1A9gFmZRW7LEkg+WfGA4ofYPrTMC3QuhPDb3xc9YxcbHFBltEb94eIWgTMpyJPR4Fb8Y4lPG5l058JSAmK+jQDZPF2+sHZO9G3aNNxO+MFu90tkYqcCNYcwcAIWRPgw8EDVnkr5x8RaBZv+CbqyxatcKi3DPbQO+/xKhET/4yaUd0mlLi9e/oP5kdbqNhjcTPT03ThoDO1iFDFCCP5RP+mrthV9pziJYvBqyPx9x0UKbVKhkPkx9nAOcWtX8S2DXPacQcfbcOrdN4qs1qU5fFK44cJIPlfvRNhI8OzTM+pPwgpT6tsRkl4MRdQJu4gTkM9jNuUz9DgebLJ3fGbT7Zbsc+OBR8IsQxJ+p5vDcs0SWAIWXt8E59EfwBkDmhLHgSGHJdtfLpkMB/t3mIr1VZpgFz2lzoY+OM+Nqum0GiKW1NtNwW9L79Wq7GE/9QhN+EJFftXe3GdtbHPccydMuATJavQZgBkfxLgP2vPLVtaW8TfFuiCceZz/mgrFvVZ1x4xhM7CoNHcxV04lb0Ni73qdt20PTvXRpme7+a6HlNEcsYVtnFO8Dy3SIorrskFna4S15wQfOoskG6OUrHYTXDhJghjIKo65lYAPluUvt0lsBiHmrVnr0zHbW2dohCJ+yg6TFeUoN+eIdrgyjoI6EEYpiyVF04O0GgPydZY0G6KcuykQsXUoNaTaOnYxxYBWLFY6KbBH5jE9+yFIcXvwkvZfKKzAkeHUBu+4P]
+
+# vim: ts=2 sw=2 sts=2 et :
