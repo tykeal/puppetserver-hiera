@@ -20,6 +20,9 @@ puppet::main:
 
 ipacerts: false
 
+# All python systems should install virtualenv, even if not in use
+python::virtualenv: true
+
 # NTP configuration
 # basic self only (aka client)
 ntp::servers:
