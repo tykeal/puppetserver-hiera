@@ -22,6 +22,8 @@ ipacerts: false
 
 # All python systems should install virtualenv, even if not in use
 python::virtualenv: present
+# python::dev is required by virtualenv
+python::dev: present
 
 # NTP configuration
 # basic self only (aka client)
