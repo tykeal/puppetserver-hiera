@@ -217,12 +217,6 @@ sysctl::base::values:
     value: 4294967296
   kernel.shmmax:
     value: 68719476736
-  net.bridge.bridge-nf-call-ip6tables:
-    value: 0
-  net.bridge.bridge-nf-call-iptables:
-    value: 0
-  net.bridge.bridge-nf-call-arptables:
-    value: 0
   net.ipv4.ip_forward:
     value: 0
   net.ipv4.conf.default.rp_filter:
