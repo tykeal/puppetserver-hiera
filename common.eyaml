@@ -32,6 +32,10 @@ ntp::servers:
 ntp::restrict:
   - '127.0.0.1'
 
+# nsswitch defaults to sudoers using 'files sss' but sss is not installed
+# by default
+nsswitch::sudoers: 'files'
+
 # default option tree for saz-ssh
 
 ## sshd_config
