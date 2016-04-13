@@ -25,6 +25,9 @@ python::virtualenv: present
 # python::dev is required by virtualenv
 python::dev: present
 
+# force IUS version of git globally
+git::package_name: 'git2u'
+
 # NTP configuration
 # basic self only (aka client)
 ntp::servers:
