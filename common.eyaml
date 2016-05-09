@@ -31,7 +31,10 @@ git::package_name: 'git2u'
 # NTP configuration
 # basic self only (aka client)
 ntp::servers:
-  - 'monitor.linux-foundation.org'
+  - '0.centos.pool.ntp.org'
+  - '1.centos.pool.ntp.org'
+  - '2.centos.pool.ntp.org'
+  - '3.centos.pool.ntp.org'
 ntp::restrict:
   - '127.0.0.1'
 
@@ -131,8 +134,6 @@ pam::allowed_users: 'ALL'
 #configurerelay: true
 #
 ## default relay configuration
-## default host is lf-smtp2 (IP: 172.17.192.36)
-##postfix::relay::relayhost: '[172.17.192.36]'
 #postfix::relay::sender_hostname: "%{::hostname}.bardicgrove.org"
 #postfix::relay::masquerade_domains: 'bardicgrove.org'
 #
@@ -148,18 +149,8 @@ pam::allowed_users: 'ALL'
 #postfix::inet_interfaces: 'localhost'
 #postfix::mta: false
 #postfix::satellite: true
-#postfix::relayhost: '[172.17.192.36]'
 #postfix::root_mail_recipient: 'root@mail.bardicgrove.org'
 #
-## additional configs, systems may set their own and they will be merged
-## into this hash, as such, the aggregate of the hiera levels for this
-## hash will be used so if a key is currently being set that needs to be
-## unset please talk to agrimberg / tykeal about it
-#postfix::configs:
-#  'sender_hostname':
-#    value: "%{::hostname}.linuxfoundation.org"
-#  'masquerade_domains':
-#    value: 'linuxfoundation.org'
 
 # pin rsyslog -- module default is to always install latest but this can
 # have issues due to a) unexpected upgrades and b) problems with yum

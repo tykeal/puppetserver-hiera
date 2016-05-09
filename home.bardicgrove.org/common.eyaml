@@ -8,16 +8,6 @@ filebucket:
 # global puppet master server setting
 puppetserver: 'puppet.home.bardicgrove.org'
 
-# NTP configuration
-# basic self only (aka client)
-ntp::servers:
-  - '0.centos.pool.ntp.org'
-  - '1.centos.pool.ntp.org'
-  - '2.centos.pool.ntp.org'
-  - '3.centos.pool.ntp.org'
-ntp::restrict:
-  - '127.0.0.1'
-
 # sudo config for domain
 sudo::configs:
   wheel:
