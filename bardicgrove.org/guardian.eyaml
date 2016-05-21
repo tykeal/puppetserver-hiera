@@ -16,7 +16,8 @@ r10k::manage_modulePath: false
 
 # if puppetdb::master::config::puppetdb_server is not set it defaults to
 # localhost
-#puppetdb::master::config::puppetdb_server: 'guardian.bardicgrove.org'
+#
+# puppetdb::master::config::puppetdb_server: 'guardian.bardicgrove.org'
 
 # change the puppet_service_name to puppetserver for new
 # clojure based puppetserver

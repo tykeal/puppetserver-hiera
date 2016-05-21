@@ -44,7 +44,8 @@ nsswitch::sudoers: 'files'
 
 # default option tree for saz-ssh
 
-## sshd_config
+# sshd_config
+#
 # sshd:
 #   storeconfigs_enabled: true
 #   options:
@@ -56,7 +57,8 @@ nsswitch::sudoers: 'files'
 #     UsePAM: 'yes'
 
 
-## ssh_config
+# ssh_config
+#
 # ssh:
 #   storeconfigs_enabled: true
 #   options:
@@ -67,18 +69,19 @@ nsswitch::sudoers: 'files'
 #  NOTE: ${sftp_server_path} resolves to the default for a given host OS
 
 # Set all unknown defaults and differing defaults
-#sshd:
-#  storeconfigs_enabled: false
-#  options:
-#    Protocol: 2
-#    Port:
-#      - 22
-#    PermitRootLogin: 'forced-commands-only'
-#    AuthorizedKeysFile: '.ssh/authorized_keys'
-#    PasswordAuthentication: 'no'
-#    GSSAPIAuthentication: 'yes'
-#    GSSAPICleanupCredentials: 'yes'
-#    AcceptEnv: 'LANG LC_* XMODIFIERS'
+#
+# sshd:
+#   storeconfigs_enabled: false
+#   options:
+#     Protocol: 2
+#     Port:
+#       - 22
+#     PermitRootLogin: 'forced-commands-only'
+#     AuthorizedKeysFile: '.ssh/authorized_keys'
+#     PasswordAuthentication: 'no'
+#     GSSAPIAuthentication: 'yes'
+#     GSSAPICleanupCredentials: 'yes'
+#     AcceptEnv: 'LANG LC_* XMODIFIERS'
 
 ssh::server::storeconfigs_enabled: false
 ssh::server::options:
@@ -131,25 +134,28 @@ pam::allowed_users: 'ALL'
 # Mail configuration
 # set configurerelay to false to not configure the default relay
 # if false then postfix::conf needs to be built up
-#configurerelay: true
 #
-## default relay configuration
-#postfix::relay::sender_hostname: "%{::hostname}.bardicgrove.org"
-#postfix::relay::masquerade_domains: 'bardicgrove.org'
+# configurerelay: true
 #
-## Mail configuration
-## By default all systems are considered "satellite" meaning that they
-## relay their mail to another system that is configured as mta
-## NOTE: mta & satellite flags are mutually exclusive. One _must_ be set
-## to true and one _must_ be set to false or the postfix module isn't
-## going to work poperly
-## NOTE: a relayhost _must_ be defined. It must be defined as a proper
-## relay configuration _or_ the special keyword 'direct' which should in
-## general only be used on systems configured as mta
-#postfix::inet_interfaces: 'localhost'
-#postfix::mta: false
-#postfix::satellite: true
-#postfix::root_mail_recipient: 'root@mail.bardicgrove.org'
+# default relay configuration
+#
+# postfix::relay::sender_hostname: "%{::hostname}.bardicgrove.org"
+# postfix::relay::masquerade_domains: 'bardicgrove.org'
+#
+# Mail configuration
+# By default all systems are considered "satellite" meaning that they
+# relay their mail to another system that is configured as mta
+# NOTE: mta & satellite flags are mutually exclusive. One _must_ be set
+# to true and one _must_ be set to false or the postfix module isn't
+# going to work poperly
+# NOTE: a relayhost _must_ be defined. It must be defined as a proper
+# relay configuration _or_ the special keyword 'direct' which should in
+#
+# general only be used on systems configured as mta
+# postfix::inet_interfaces: 'localhost'
+# postfix::mta: false
+# postfix::satellite: true
+# postfix::root_mail_recipient: 'root@mail.bardicgrove.org'
 #
 
 # pin rsyslog -- module default is to always install latest but this can
@@ -161,15 +167,15 @@ rsyslog::package_status: 'installed'
 auditd::manage_service: false
 
 # Mcollective / rabbitmq defaults for puppet4
-#mcollective::manage_packages: false
-#mcollective::confdir: '/etc/puppetlabs/mcollective'
-#mcollective::core_libdir: '/opt/puppetlabs/mcollective/plugins'
-#mcollective::site_libdir: '/usr/local/libexec/mcollective/mcollective'
-#mcollective::connector: 'rabbitmq'
-#erlang::epel_enable: true
-#rabbitmq::version: '3.3.5-4'
-#rabbitmq::manage_repo: false
-#rabbitmq::package_provider: 'yum'
+# mcollective::manage_packages: false
+# mcollective::confdir: '/etc/puppetlabs/mcollective'
+# mcollective::core_libdir: '/opt/puppetlabs/mcollective/plugins'
+# mcollective::site_libdir: '/usr/local/libexec/mcollective/mcollective'
+# mcollective::connector: 'rabbitmq'
+# erlang::epel_enable: true
+# rabbitmq::version: '3.3.5-4'
+# rabbitmq::manage_repo: false
+# rabbitmq::package_provider: 'yum'
 
 # manage "common user" accounts
 # We would prefer not to do this but after researching what was going to
@@ -243,7 +249,7 @@ resolv_conf::options:
   - 'timeout:2'
 resolv_conf::searchpath: "%{::domain}"
 
-#### MONITORING / nagios / nrpe
+# MONITORING / nagios / nrpe
 # path to the nagios plugins for use as a lookup in nrpe
 nagios_plugin_dir: '/usr/lib64/nagios/plugins'
 
@@ -272,7 +278,7 @@ nrpe::commands:
   'check_zombie_procs':
     'command': "%{hiera('nagios_plugin_dir')}/check_procs -w 5 -c 10 -s Z"
 
-#### SSL CA information (certs should be done at the domain level to be
+# SSL CA information (certs should be done at the domain level to be
 # able to be dealt with decently using eyaml encryption)
 sslmgmt::ca:
   comodo: |
