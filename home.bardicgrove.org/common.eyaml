@@ -24,10 +24,10 @@ users_common:
     shell: /bin/bash
     groups: wheel
     password: ENC[GPG,hQEMA4i0Em3b1yILAQf9HSTlp9wM20K9tKudhAO2Gd9m8Qnn6ZLtPS1m74r4k6DpaYvaKkFirsL7EBaotsvFtO/9p2YJVvLwA6A1GkxLU6t/Auml9wJujYriVd7CBl8xqEV06KqwuZ6RsKSlMhAGIYLfFM0su61YNL4xsQiY/YqYgqmcyhYCErbjNgwImW1s3o+KJykw1xf/cneL4Uiw1HdiIRxApytrzXYITedDrHZaiFnFNiYncU6X3tHlCFEfZTGmGHLQ0yZ8zGtSwilIP1DHFEik+4vhEP6jI2zkay4/dT5lct2h/0ijwiZ0+/sFFDcyJYRu1YjVgt8JEbISgwRwUE3o+uQvlcxtFq8z+IUCDAOVosJoWKQPaQEP/1FmEh1ukPqQ/BJEEr4JcVxz0PpWBaz0qYh/CQc4SHJYT4k55PCZ/CgGVpdz0c4zl/99uZ/GgYF0dlp5g2TwEoKHvu0znEnE2D91AWjXmMjBcrkbyDDOLQqkW0o8UF0Rz6HELVUmZedmi9Ht8KYExSPRBBDbKK73HEPfuu70vI+dh03TsPlOhADu7d/SPkGM7DDobA2w6acBQayz6WTb3IPqe83mHQK0HUJJDT+KeYg5OwMW46qhVEGy+wiVRiY3VjN3UfLPlN1leEsN/Wil0Fy6la/bs/ePMrUa1jCvLCVYhbIAKjezbNUM00sJIIeKquAZJ6NY0dp9phkGWrzJG5sAa9S0vvag8ay3J39yt/VDo/lN+TcA0GSPL0dfmLB0ZRiJszPjcrO/naStq8aBo81y1PuvvJrneoecgJwlHQ/WrHRd0u4AX9EuiZwzqq7ZSXTBR3HsMDO2TFUO3ARp7csfm+NTUDYB+0gwywlguzmi2e8AxO5reaJeSrPPci+622KehJZui37ANrQCPOQr7Td6GHfCZgdU/6uADIqy0TjOX4xyTqlL99lAKnUUnCDqqdD8STlHXft50FDu7po8nwYemUNNqxtn3p733ZZphSV58klhsiNNK0Yaxy/KuaJQDlxCr+W9QgrxUBlV8pZs0EEEiqI/YXlPQRpwEWxfez8J0qUBbXO2d7scqD3m8RfwVsg836bT7hrl4klCJJu3CJ8U82f0BZBvuVor75Opsd9+1o/XbB+jQbtBAwI2PMAVdFAuDefHTohsOtpI4xlGnT90/f5LfjahgZmHwddfAUDCTsn6v4ihe1HXLWYp2nrfWY64cPSeoPWS+Eu2dvrr7bXTVd93j33dxn0tZOwl6v5JeLKykCOyF/qcKaHqqREcZH8QAbxGJ74=]
-    ssh_authorized_keys:
-      yubi-tykeal@bardicgrove.org:
-        type: 'ssh-rsa'
-        key: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCv5BzD+/7hXdODNFHivSmVdOVr3nQaQPebRc/ebXdBPjgHxb3l+odx85H/0A5GnMbJUTBgiOSoRpr5WejV2H30qTg5SduEKvpetGpofg3C07w5VTdGRGguGT2m4jS06OmO/lgFaYzKGZZ+/Yu7VQmu5t2ZUqmTSp/fLYhYSQ9bulOmOHwnJHT4KSsrZaIZV+ERF/mooeaQyZwupZhwgrgdOkAX+Bcy50fNrI/EZJET+WmX0VJV0hCQd2kzOzrONb4JZuFMY0Ks+VvIbyJTyzCik4WRwUl/Jp+jp13SZhOngxe2V6O+cYlqtHqgmP5yI+KMadB6UMNZVdChLf6T+naB'
+    # ssh_authorized_keys:
+    #   yubi-tykeal@bardicgrove.org:
+    #     type: 'ssh-rsa'
+    #     key: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCv5BzD+/7hXdODNFHivSmVdOVr3nQaQPebRc/ebXdBPjgHxb3l+odx85H/0A5GnMbJUTBgiOSoRpr5WejV2H30qTg5SduEKvpetGpofg3C07w5VTdGRGguGT2m4jS06OmO/lgFaYzKGZZ+/Yu7VQmu5t2ZUqmTSp/fLYhYSQ9bulOmOHwnJHT4KSsrZaIZV+ERF/mooeaQyZwupZhwgrgdOkAX+Bcy50fNrI/EZJET+WmX0VJV0hCQd2kzOzrONb4JZuFMY0Ks+VvIbyJTyzCik4WRwUl/Jp+jp13SZhOngxe2V6O+cYlqtHqgmP5yI+KMadB6UMNZVdChLf6T+naB'
 
 # default resolv_conf setup (each $domain should set this in their
 # common.yaml) this is just a failsafe
