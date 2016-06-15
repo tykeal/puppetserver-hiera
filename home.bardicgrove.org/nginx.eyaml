@@ -1,6 +1,6 @@
 ---
 
-role: role::nginx
+role: role::webserver::nginx
 
 nginx::resourcetag: 'home-lab'
 
