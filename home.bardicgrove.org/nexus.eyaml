@@ -16,14 +16,6 @@ apache::vhosts:
     docroot: '/srv/sonatype-work/nexus/storage/logs'
     manage_docroot: false
     port: '80'
-    custom_fragment: |
-      AddType text/plain .txt
-      RemoveType .gz
-      AddEncoding gzip .gz
-      <FilesMatch ".+\.tar\.gz$">
-        RemoveEncoding .gz
-        AddType application/gzip .gz
-      </FilesMatch>
 
 selinux::fcontexts:
   '/srv/sonatype-work/nexus/storage':
