@@ -18,6 +18,7 @@ apache::vhosts:
     port: '80'
     filters:
       - AddOutputFilterByType DEFLATE text/html text/plain text/xml text/javascript text/css
+      - AddType text/plain .txt
     custom_fragment: |
       <IfModule mod_headers.c>
         # Serve gzip compressed txt files if they exist
