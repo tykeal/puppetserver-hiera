@@ -22,8 +22,8 @@ apache::vhosts:
       <IfModule mod_headers.c>
         # Serve gzip compressed txt files if they exist
         # and the client accepts gzip.
-        RewriteCond "%%{HTTP:Accept-encoding}" "gzip"
-        RewriteCond "%%{REQUEST_FILENAME}\.gz" -s
+        RewriteCond "%%{}{HTTP:Accept-encoding}" "gzip"
+        RewriteCond "%%{}{REQUEST_FILENAME}\.gz" -s
         RewriteCond "^(.*)\.txt" "$1\.txt.gz" [QSA]
 
         # Do not recompress if with mod_deflate
