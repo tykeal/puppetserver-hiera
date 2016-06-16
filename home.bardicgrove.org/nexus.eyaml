@@ -16,6 +16,8 @@ apache::vhosts:
     docroot: '/srv/sonatype-work/nexus/storage/logs'
     manage_docroot: false
     port: '80'
+    filters:
+      - AddOutputFilterByType DEFLATE text/html text/plain text/xml text/javascript text/css
     custom_fragment: |
       <IfModule mod_headers.c>
         # Serve gzip compressed txt files if they exist
@@ -25,7 +27,7 @@ apache::vhosts:
         RewriteCond "^(.*)\\.txt" "$1\\.txt.gz" [QSA]
 
         # Do not recompress if with mod_deflate
-        RewriteRule "\\.txt\\.gz$" "-" [T=text/text,E=no-gzip:1]
+        RewriteRule "\\.txt\\.gz$" "-" [T=text/plain,E=no-gzip:1]
 
         <FilesMatch "(\\.txt\\.gz)$">
           # Serve correct encoding type
