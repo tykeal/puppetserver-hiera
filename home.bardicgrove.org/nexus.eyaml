@@ -16,10 +16,9 @@ apache::vhosts:
     docroot: '/srv/sonatype-work/nexus/storage/logs'
     manage_docroot: false
     port: '80'
-    filters:
-      - RemoveType .gz
-      - AddEncoding gzip .gz
     custom_fragment: |
+      RemoveType .gz
+      AddEncoding gzip .gz
       <FilesMatch ".+\.tar\.gz$">
         RemoveEncoding .gz
         AddType application/gzip .gz
