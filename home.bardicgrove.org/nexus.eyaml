@@ -17,6 +17,7 @@ apache::vhosts:
     manage_docroot: false
     port: '80'
     custom_fragment: |
+      AddType text/plain .txt
       RemoveType .gz
       AddEncoding gzip .gz
       <FilesMatch ".+\.tar\.gz$">
