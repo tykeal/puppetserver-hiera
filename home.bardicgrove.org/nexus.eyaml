@@ -36,7 +36,7 @@ apache::vhosts:
   'bob.home.bardicgrove.org':
     ensure: 'present'
     docroot: '/var/www/html'
-    maange_docroot: false
+    manage_docroot: false
     port: '80'
 
 selinux::fcontexts:
