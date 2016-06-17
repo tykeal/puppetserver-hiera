@@ -10,6 +10,16 @@ nexus::version: '2.13.0'
 nexus::revision: '01'
 nexus::nexus_context: '/'
 
+nginx::ssl_apache_certs:
+  'logs.home.bardicgrove.org':
+    cert_name: 'foo-cert'
+    cert_chain: 'foo-chain'
+    dhaparam: 'foo-dhparam'
+  'bob.home.bardicgrove.org':
+    cert_name: 'foo2-cert'
+    cert_chain: 'foo2-chain'
+    dhaparam: 'foo2-dhaparam'
+
 apache::vhosts:
   'logs.home.bardicgrove.org':
     ensure: 'present'
@@ -23,6 +33,11 @@ apache::vhosts:
         RemoveEncoding .gz
         AddType application/gzip .gz
       </FilesMatch>
+  'bob.home.bardicgrove.org':
+    ensure: 'present'
+    docroot: '/var/www/html'
+    maange_docroot: false
+    port: '80'
 
 selinux::fcontexts:
   '/srv/sonatype-work/nexus/storage':
