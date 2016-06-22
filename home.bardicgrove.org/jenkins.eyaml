@@ -9,8 +9,19 @@ nginx::export::vhost: 'jenkins-lab.home.bardicgrove.org'
 # make sure that python dev is installed
 python::dev: true
 
-# Standard jenkins configuration
+# Common Jenkins configuration for all environments
+jenkins::lts: true
+# Nginx port to proxy, should match JENKINS_PORT
+jenkins::port: 8080
+# We will manage java through profile::java
 jenkins::install_java: false
+# The jenkins-cli war is needed to setup LDAP auth and use
+# puppet-jenkins resources
+jenkins::cli: true
+# Always let the jenkins module handle the firewall
+jenkins::configure_firewall: true
+
+# Standard jenkins configuration
 jenkins::auth: 'ldap'
 jenkins::ldap:
   server: 'ldaps://ldap1.linux-foundation.org'
