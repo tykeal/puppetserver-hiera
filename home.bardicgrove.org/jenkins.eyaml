@@ -10,6 +10,7 @@ nginx::export::vhost: 'jenkins-lab.home.bardicgrove.org'
 python::dev: true
 
 # Standard jenkins configuration
+jenkins::install_java: false
 jenkins::auth: 'ldap'
 jenkins::ldap:
   server: 'ldaps://ldap1.linux-foundation.org'
