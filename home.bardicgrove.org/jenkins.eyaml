@@ -1,0 +1,29 @@
+---
+
+role: '::role::jenkins'
+
+nginx::exporttag: 'home-lab'
+
+nginx::export::vhost: 'jenkins-lab.home.bardicgrove.org'
+
+# make sure that python dev is installed
+python::dev: true
+
+# Standard jenkins configuration
+jenkins::auth: 'ldap'
+jenkins::ldap:
+  server: 'ldaps://ldap1.linux-foundation.org'
+  rootDN: 'dc=freestandards,dc=org'
+  userSearchBase: 'ou=Users'
+  userSearch: 'uid={0}'
+  groupSearchBase: 'ou=Groups'
+  inhibitInferRootDN: false
+
+jenkins::admin: 'agrimberg'
+
+jenkins::matrixstrategy:
+  'Jenkins.ADMINISTER':
+    - 'agrimberg'
+    - 'lf-collab-admins'
+
+# vim: ts=2 sw=2 sts=2 et :
