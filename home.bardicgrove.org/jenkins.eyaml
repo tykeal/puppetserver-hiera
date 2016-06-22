@@ -21,6 +21,13 @@ jenkins::cli: true
 # Always let the jenkins module handle the firewall
 jenkins::configure_firewall: true
 
+# Config hash
+jenkins::config_hash:
+  JENKINS_PORT:
+    value: '8080'
+  JENKINS_AJP_PORT:
+    value: '-1'
+
 # Standard jenkins configuration
 jenkins::auth: 'ldap'
 jenkins::ldap:
