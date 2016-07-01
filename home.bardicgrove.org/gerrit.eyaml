@@ -3,7 +3,7 @@
 role: role::gerrit
 
 # The resource collection tag to be used by our nginx system(s)
-nginx::exporttag: 'bardichome-nginx'
+nginx::exporttag: 'home-lab'
 
 # nginx SSL information
 nginx::ssl_cert_name: 'bardicgrove'
@@ -31,7 +31,7 @@ gerrit::override_options:
     interval: '2 day'
   gerrit:
     basePath: '/srv/gerrit'
-    canonicalWebUrl: 'http://gerrit.home.bardicgrove.org:8080'
+    canonicalWebUrl: 'http://gerrit-lab.bardicgrove.org/r'
   gitweb:
     cgi: '/var/www/git/gitweb.cgi'
   httpd:
