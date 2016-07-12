@@ -1,8 +1,0 @@
----
-
-role: role::zuul
-
-zuul::manage_layout: false
-zuul::service_enabled: manual
-
-# vim: ts=2 sw=2 sts=2 et :
