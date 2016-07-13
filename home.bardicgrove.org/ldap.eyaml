@@ -13,17 +13,23 @@ openldap::server::globalconf:
     value: 'stats sync'
 
 openldap::server::schema::definition:
-  ldapns:
-    source: 'puppet:///modules/profile/ldap/ldapns.schema'
   freeradius:
     source: 'puppet:///modules/profile/ldap/freeradius.schema'
+  ldapns:
+    source: 'puppet:///modules/profile/ldap/ldapns.schema'
   WSO2IS:
     source: 'puppet:///modules/profile/ldap/WSO2IS.schema'
 
 openldap::server::schema:
-  ldapns:
+  corba:
+    ensure: present
+  core:
     ensure: present
   freeradius:
+    ensure: present
+  inetorgperson:
+    ensure: present
+  ldapns:
     ensure: present
   WSO2IS:
     ensure: present
