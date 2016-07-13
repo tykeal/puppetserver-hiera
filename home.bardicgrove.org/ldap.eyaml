@@ -4,7 +4,7 @@ role: '::role::ldapserver'
 
 openldap::server::globalconf:
   Security:
-    value: 'ssf=71'
+    value: 'ssf=0'
   TimeLimit:
     value: '15'
   SizeLimit:
