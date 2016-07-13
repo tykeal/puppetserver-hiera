@@ -25,6 +25,8 @@ openldap::server::schema:
     ensure: present
   core:
     ensure: present
+  cosine:
+    ensure: present
   freeradius:
     ensure: present
   inetorgperson:
