@@ -53,25 +53,25 @@ openldap::server::database:
 openldap::server::dbindex:
   'entryUUID on dc=bardicgrove,dc=org':
     indices: 'eq'
-  'uid on dc=bardicgrove,dc=org'
+  'uid on dc=bardicgrove,dc=org':
     indices: 'eq,pres,sub'
-  'cn on dc=bardicgrove,dc=org'
-    indices: 'eq,pres,sub',
-  'mail on dc=bardicgrove,dc=org'
-    indices: 'eq,pres,sub',
-  'sn on dc=bardicgrove,dc=org'
-    indices: 'eq,pres,sub',
-  'givenName on dc=bardicgrove,dc=org'
+  'cn on dc=bardicgrove,dc=org':
     indices: 'eq,pres,sub'
-  'member on dc=bardicgrove,dc=org'
+  'mail on dc=bardicgrove,dc=org':
+    indices: 'eq,pres,sub'
+  'sn on dc=bardicgrove,dc=org':
+    indices: 'eq,pres,sub'
+  'givenName on dc=bardicgrove,dc=org':
+    indices: 'eq,pres,sub'
+  'member on dc=bardicgrove,dc=org':
     indices: 'eq'
-  'uniqueMember on dc=bardicgrove,dc=org'
+  'uniqueMember on dc=bardicgrove,dc=org':
     indices: 'eq'
-  'uidNumber on dc=bardicgrove,dc=org'
+  'uidNumber on dc=bardicgrove,dc=org':
     indices: 'eq,pres'
-  'gidNumber on dc=bardicgrove,dc=org'
+  'gidNumber on dc=bardicgrove,dc=org':
     indices: 'eq,pres'
-  'dialupAccess on dc=bardicgrove,dc=org'
+  'dialupAccess on dc=bardicgrove,dc=org':
     indices: 'eq'
 
 # vim: ts=2 sw=2 sts=2 et :
