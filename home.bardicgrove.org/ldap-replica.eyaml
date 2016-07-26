@@ -16,15 +16,15 @@ openldap::server::module:
   syncprov:
     ensure: present
 
-openldap::server::overlay:
-  'syncprov on dc=bardicgrove,dc=org':
-    options:
-      olcSpCheckpoint: '100 10'
-      olcSpSessionLog: '150'
-  'syncprov on dc=example,dc=com':
-    options:
-      olcSpCheckpoint: '100 10'
-      olcSpSessionLog: '150'
+# openldap::server::overlay:
+#   'syncprov on dc=bardicgrove,dc=org':
+#     options:
+#       olcSpCheckpoint: '100 10'
+#       olcSpSessionLog: '150'
+#   'syncprov on dc=example,dc=com':
+#     options:
+#       olcSpCheckpoint: '100 10'
+#       olcSpSessionLog: '150'
 
 openldap::server::access:
   'to * by dn="cn=syncrepl,dc=bardicgrove,dc=org" on dc=bardicgrove,dc=org':
