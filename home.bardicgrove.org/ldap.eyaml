@@ -19,11 +19,11 @@ openldap::server::module:
 openldap::server::overlay:
   'syncprov on dc=bardicgrove,dc=org':
     options:
-      oclSpCheckpoint: '100 10'
+      olcSpCheckpoint: '100 10'
       olcSpSessionLog: '150'
   'syncprov on dc=example,dc=com':
     options:
-      oclSpCheckpoint: '100 10'
+      olcSpCheckpoint: '100 10'
       olcSpSessionLog: '150'
 
 openldap::server::schema::definition:
