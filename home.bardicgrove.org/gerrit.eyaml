@@ -35,7 +35,7 @@ gerrit::override_options:
     interval: '2 day'
   gerrit:
     basePath: '/srv/gerrit'
-    canonicalWebUrl: 'http://gerrit.home.bardicgrove.org:8080/r'
+    canonicalWebUrl: 'http://gerrit.home.bardicgrove.org:8080/'
   gitweb:
     cgi: '/var/www/git/gitweb.cgi'
   httpd:
