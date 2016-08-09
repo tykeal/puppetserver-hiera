@@ -60,7 +60,7 @@ gerrit::override_options:
 gerrit::third_party_plugins:
   delete-project:
     # yamllint disable rule:line-length
-    plugin_source: 'https://gerrit-ci.gerritforge.com/view/Plugins-stable-2.11/job/plugin-delete-project-stable-2.11/lastSuccessfulBuild/artifact/buck-out/gen/plugins/delete-project/delete-project.jar'
+    plugin_source: 'https://gerrit-ci.gerritforge.com/view/Plugins-stable-2.12/job/plugin-delete-project-stable-2.12/lastSuccessfulBuild/artifact/buck-out/gen/plugins/delete-project/delete-project.jar'
     # yamllint enable
 
 gerrit::override_secure_options:
