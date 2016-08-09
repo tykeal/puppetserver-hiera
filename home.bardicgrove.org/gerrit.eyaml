@@ -57,10 +57,34 @@ gerrit::override_options:
 
 gerrit::third_party_plugins:
   delete-project:
+    # yamllint disable rule:line-length
     plugin_source: 'https://gerrit-ci.gerritforge.com/view/Plugins-stable-2.11/job/plugin-delete-project-stable-2.11/lastSuccessfulBuild/artifact/buck-out/gen/plugins/delete-project/delete-project.jar'
+    # yamllint enable
 
 gerrit::override_secure_options:
   database:
+    # yamllint disable rule:line-length
     password: ENC[GPG,hQEMA4i0Em3b1yILAQf+PN3b9LI54dfRLfmQxOznFsIUjWNxBQP2EzAJpz9fQMeOfOXW2pCKqI7FaGnOBxRk8RA9opWmTlQU8SxnKzhp6xVezgjR+VgrarBdEw/4WIwAwqd8nETeKZp7ioYSKHMg7X5J6lzc4Yn5VncUU3Z4OsnQpkt2X7kgb1+oC5aEHkZHx7uVp2t7Bhc8PMIHmt6qJ8hWMxI0EWWyWKqgINvtv8Jj/q5musWUlYxElqbI5xtpU74jYwSDjJu8hwcPsd2Xx5VD6N0nn6cWq4IcCaoii/8G6x5lgqOjLPQRHLJR0E0r150YPfubAD7eg824naBL8p0FScpkiEoUNREeDRxYLYUCDAOVosJoWKQPaQEP/0WGEqFarrY862f5sMurRRNQPgAB1HV3JOf7kAPOLy/FZfZ1nystjtE0Bb/jUOFuM8UO1A9gFmZRW7LEkg+WfGA4ofYPrTMC3QuhPDb3xc9YxcbHFBltEb94eIWgTMpyJPR4Fb8Y4lPG5l058JSAmK+jQDZPF2+sHZO9G3aNNxO+MFu90tkYqcCNYcwcAIWRPgw8EDVnkr5x8RaBZv+CbqyxatcKi3DPbQO+/xKhET/4yaUd0mlLi9e/oP5kdbqNhjcTPT03ThoDO1iFDFCCP5RP+mrthV9pziJYvBqyPx9x0UKbVKhkPkx9nAOcWtX8S2DXPacQcfbcOrdN4qs1qU5fFK44cJIPlfvRNhI8OzTM+pPwgpT6tsRkl4MRdQJu4gTkM9jNuUz9DgebLJ3fGbT7Zbsc+OBR8IsQxJ+p5vDcs0SWAIWXt8E59EfwBkDmhLHgSGHJdtfLpkMB/t3mIr1VZpgFz2lzoY+OM+Nqum0GiKW1NtNwW9L79Wq7GE/9QhN+EJFftXe3GdtbHPccydMuATJavQZgBkfxLgP2vPLVtaW8TfFuiCceZz/mgrFvVZ1x4xhM7CoNHcxV04lb0Ni73qdt20PTvXRpme7+a6HlNEcsYVtnFO8Dy3SIorrskFna4S15wQfOoskG6OUrHYTXDhJghjIKo65lYAPluUvt0lsBiHmrVnr0zHbW2dohCJ+yg6TFeUoN+eIdrgyjoI6EEYpiyVF04O0GgPydZY0G6KcuykQsXUoNaTaOnYxxYBWLFY6KbBH5jE9+yFIcXvwkvZfKKzAkeHUBu+4P]
+    # yamllint enable
+
+# push ssh known hosts
+ssh::known_hosts:
+  'github.com':
+    name: 'github.com'
+    host_aliases:
+      - 192.30.252.131
+    ensure: present
+    type: 'ssh-rsa'
+    # yamllint disable rule:line-length
+    key: 'AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ'
+    # yamllint enable
+
+# push ssh user configuration
+ssh::users_client_options:
+  gerrit:
+    user_home_dir: '/opt/gerrit'
+    options:
+      'Host github.com':
+        User: git
 
 # vim: ts=2 sw=2 sts=2 et :
