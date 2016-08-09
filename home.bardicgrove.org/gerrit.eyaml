@@ -3,13 +3,15 @@
 role: role::gerrit
 
 # The resource collection tag to be used by our nginx system(s)
-nginx::exporttag: 'home-lab'
+#nginx::exporttag: 'home-lab'
+
+nginx::export_vhost: false
 
 # nginx SSL information
-nginx::ssl_cert_name: 'bardicgrove'
-nginx::ssl_cert_chain: 'startcom_sub_class2'
-nginx::ssl_dhparam: 'gerrit2kdhparam'
-
+#nginx::ssl_cert_name: 'bardicgrove'
+#nginx::ssl_cert_chain: 'startcom_sub_class2'
+#nginx::ssl_dhparam: 'gerrit2kdhparam'
+#
 gerrit::gitweb_package_name: 'git2u-gitweb'
 
 # what mysql db do we want to pick us up
@@ -33,7 +35,7 @@ gerrit::override_options:
     interval: '2 day'
   gerrit:
     basePath: '/srv/gerrit'
-    canonicalWebUrl: 'http://gerrit-lab.bardicgrove.org/r'
+    canonicalWebUrl: 'http://gerrit.home.bardicgrove.org:8080/r'
   gitweb:
     cgi: '/var/www/git/gitweb.cgi'
   httpd:
