@@ -31,18 +31,17 @@ jenkins::config_hash:
 # Standard jenkins configuration
 jenkins::auth: 'ldap'
 jenkins::ldap:
-  server: 'ldaps://ldap1.linux-foundation.org'
-  rootDN: 'dc=freestandards,dc=org'
+  server: 'ldap://ldap.home.bardicgrove.org'
+  rootDN: 'dc=bardicgrove,dc=org'
   userSearchBase: 'ou=Users'
   userSearch: 'uid={0}'
   groupSearchBase: 'ou=Groups'
   inhibitInferRootDN: false
 
-jenkins::admin: 'agrimberg'
+jenkins::admin: 'tykeal'
 
 jenkins::matrixstrategy:
   'Jenkins.ADMINISTER':
-    - 'agrimberg'
-    - 'lf-collab-admins'
+    - 'tykeal'
 
 # vim: ts=2 sw=2 sts=2 et :
