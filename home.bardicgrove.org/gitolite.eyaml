@@ -1,8 +1,0 @@
----
-
-role: role::gitolite
-
-gitolite::git_key: 'AAAAB3NzaC1yc2EAAAADAQABAAABAQCv5BzD+/7hXdODNFHivSmVdOVr3nQaQPebRc/ebXdBPjgHxb3l+odx85H/0A5GnMbJUTBgiOSoRpr5WejV2H30qTg5SduEKvpetGpofg3C07w5VTdGRGguGT2m4jS06OmO/lgFaYzKGZZ+/Yu7VQmu5t2ZUqmTSp/fLYhYSQ9bulOmOHwnJHT4KSsrZaIZV+ERF/mooeaQyZwupZhwgrgdOkAX+Bcy50fNrI/EZJET+WmX0VJV0hCQd2kzOzrONb4JZuFMY0Ks+VvIbyJTyzCik4WRwUl/Jp+jp13SZhOngxe2V6O+cYlqtHqgmP5yI+KMadB6UMNZVdChLf6T+naB'
-gitolite::admin_user: 'tykeal'
-
-# vim: ts=2 sw=2 sts=2 et :
