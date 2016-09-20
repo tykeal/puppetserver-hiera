@@ -44,4 +44,16 @@ jenkins::matrixstrategy:
   'Jenkins.ADMINISTER':
     - 'tykeal'
 
+jenkins::plugin_hash:
+  structs:
+    pin: false
+  junit:
+    pin: false
+  display-url-api:
+    pin: false
+  mailer:
+    pin: false
+  ldap:
+    pin: false
+
 # vim: ts=2 sw=2 sts=2 et :
