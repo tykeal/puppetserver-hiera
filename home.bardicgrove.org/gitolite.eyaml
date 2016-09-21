@@ -12,4 +12,9 @@ gitd::user: 'git'
 gitd::group: 'git'
 gitd::repopath: '/home/git/repositories'
 
+# Make sure that the git repos have the correct label
+selinux::fcontexts:
+  '/home/git/repositories':
+    setype: 'git_system_t'
+
 # vim: ts=2 sw=2 sts=2 et :
