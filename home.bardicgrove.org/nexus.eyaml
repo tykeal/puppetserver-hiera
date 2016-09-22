@@ -6,26 +6,10 @@ nginx::exporttag: 'home-lab'
 
 nginx::export::vhost: 'nexus-lab.home.bardicgrove.org'
 
-nexus::version: '2.13.0'
-nexus::revision: '01'
+nexus::version: '3.0.2'
+nexus::revision: '02'
 nexus::nexus_context: '/'
-
-apache::vhosts:
-  'logs.home.bardicgrove.org':
-    ensure: 'present'
-    docroot: '/srv/sonatype-work/nexus/storage/logs'
-    manage_docroot: false
-    port: '80'
-    custom_fragment: |
-      RemoveType .gz
-      AddEncoding gzip .gz
-      <FilesMatch ".+\.tar\.gz$">
-        RemoveEncoding .gz
-        AddType application/gzip .gz
-      </FilesMatch>
-
-selinux::fcontexts:
-  '/srv/sonatype-work/nexus/storage':
-    setype: 'httpd_sys_content_t'
+nexus::download_site: 'http://download.sonatype.com/nexus/3'
+nexus::nexus_type: 'unix'
 
 # vim: ts=2 sw=2 sts=2 et :
