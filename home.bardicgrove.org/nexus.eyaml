@@ -1,6 +1,6 @@
 ---
 
-role: '::role::nexus::with_apache'
+role: '::role::nexus'
 
 nginx::exporttag: 'home-lab'
 
@@ -11,5 +11,6 @@ nexus::revision: '02'
 nexus::nexus_context: '/'
 nexus::download_site: 'http://download.sonatype.com/nexus/3'
 nexus::nexus_type: 'unix'
+nexus::nexus_work_dir_manage: false
 
 # vim: ts=2 sw=2 sts=2 et :
