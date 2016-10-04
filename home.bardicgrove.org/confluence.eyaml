@@ -1,0 +1,14 @@
+---
+
+role: role::confluence
+
+# The resource collection tag to be used by our nginx system(s)
+# nginx::exporttag: 'home-lab'
+
+java::package: 'java-1.8.0-openjdk'
+
+confluence::version: '5.10.7'
+# confluence module requires the java home be set
+confluence::javahome: '/usr/lib/jvm/java'
+
+# vim: ts=2 sw=2 sts=2 et :
