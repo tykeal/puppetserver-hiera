@@ -10,6 +10,6 @@ java::package: 'java-1.8.0-openjdk'
 confluence::version: '5.10.7'
 confluence::checksum: '6be537236e7ed20a2884031b2f819f8b'
 # confluence module requires the java home be set
-confluence::javahome: '/usr/lib/jvm/java'
+confluence::javahome: '/usr/lib/jvm/jre'
 
 # vim: ts=2 sw=2 sts=2 et :
