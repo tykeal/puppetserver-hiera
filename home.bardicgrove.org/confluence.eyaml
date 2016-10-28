@@ -20,4 +20,6 @@ confluence::db_settings:
 
 nginx::exporttag: 'home-lab'
 
+nginx::export::vhost: 'confluence-lab.home.bardicgrove.org'
+
 # vim: ts=2 sw=2 sts=2 et :
