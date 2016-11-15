@@ -28,6 +28,10 @@ python::dev: present
 # force IUS version of git globally
 git::package_name: 'git2u'
 
+# common hosts config
+hosts::enable_ipv6_localhost: false
+hosts::enable_fqdn_entry: false
+
 # NTP configuration
 # basic self only (aka client)
 ntp::servers:
