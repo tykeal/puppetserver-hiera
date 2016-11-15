@@ -31,6 +31,8 @@ git::package_name: 'git2u'
 # common hosts config
 hosts::enable_ipv6_localhost: false
 hosts::enable_fqdn_entry: false
+# do not allow unmanaged hosts entries
+hosts::purge_hosts: true
 
 # NTP configuration
 # basic self only (aka client)
