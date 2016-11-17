@@ -11,5 +11,6 @@ gitolite::public_mirror: true
 
 gitd::user: 'git'
 gitd::group: 'git'
+gitd::repopath: "%{hiera('gitolite::git_root')}"
 
 # vim: ts=2 sw=2 sts=2 et :
