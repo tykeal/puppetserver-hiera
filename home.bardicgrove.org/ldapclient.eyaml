@@ -3,3 +3,7 @@
 
 custom_profiles:
   - '::profile::ldap::client'
+
+ldap::client::cacerts:
+  lets-encrypt-x3-cross-signed:
+    pkistore: 'default'
