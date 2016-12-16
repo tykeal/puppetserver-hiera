@@ -188,15 +188,8 @@ auditd::manage_service: false
 # rabbitmq::package_provider: 'yum'
 
 # manage "common user" accounts
-# We would prefer not to do this but after researching what was going to
-# be needed to do this all cleanly from LDAP it was realized that until
-# we get our LDAP systems updated to something a little more modern and
-# flexible it's not going to happen in an easy manner.
-#
-# lfadmin has historically be uid 500 but EL7 starts user numbering at
-# 1000 and on a cloud-init enabled system the default cloud-init user
-# generally ends up at 500 causing collisions when the system is
-# attached to puppet
+# setup a temporary user account until such time as I get an IPA or LDAP
+# configuration in play
 users_common:
   tmpadmin:
     ensure: present
