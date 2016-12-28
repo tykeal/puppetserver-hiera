@@ -3,14 +3,14 @@
 role: role::gerrit
 
 # The resource collection tag to be used by our nginx system(s)
-#nginx::exporttag: 'home-lab'
+nginx::exporttag: 'home-lab'
 
-nginx::export_vhost: false
+# nginx::export_vhost: false
 
-# nginx SSL information
-#nginx::ssl_cert_name: 'bardicgrove'
-#nginx::ssl_cert_chain: 'startcom_sub_class2'
-#nginx::ssl_dhparam: 'gerrit2kdhparam'
+# # nginx SSL information
+# nginx::ssl_cert_name: 'bardicgrove'
+# nginx::ssl_cert_chain: 'startcom_sub_class2'
+# nginx::ssl_dhparam: 'gerrit2kdhparam'
 #
 gerrit::gitweb_package_name: 'git2u-gitweb'
 
