@@ -35,11 +35,11 @@ gerrit::override_options:
     interval: '2 day'
   gerrit:
     basePath: '/srv/gerrit'
-    canonicalWebUrl: 'http://gerrit.home.bardicgrove.org:8080/'
+    canonicalWebUrl: 'http://gerrit-lab.home.bardicgrove.org'
   gitweb:
     cgi: '/var/www/git/gitweb.cgi'
   httpd:
-    listenUrl: 'http://*:8080/'
+    listenUrl: 'http://*:8080'
     maxQueued: '200'
   ldap:
     server: 'ldap://ldap.home.bardicgrove.org'
@@ -57,7 +57,6 @@ gerrit::override_options:
     email: 'gerrit@gerrit.home.bardicgrove.org'
   receive:
     enableSignedPush: 'true'
-    callback: 'http://gerrit.home.bardicgrove.org:8080/oauth'
 
 gerrit::third_party_plugins:
   delete-project:
