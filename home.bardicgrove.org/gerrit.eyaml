@@ -35,11 +35,11 @@ gerrit::override_options:
     interval: '2 day'
   gerrit:
     basePath: '/srv/gerrit'
-    canonicalWebUrl: 'http://gerrit-lab.home.bardicgrove.org/'
+    canonicalWebUrl: 'http://gerrit-lab.home.bardicgrove.org/r'
   gitweb:
     cgi: '/var/www/git/gitweb.cgi'
   httpd:
-    listenUrl: 'http://*:8080/'
+    listenUrl: 'http://*:8080/r'
     maxQueued: '200'
   ldap:
     server: 'ldap://ldap.home.bardicgrove.org'
