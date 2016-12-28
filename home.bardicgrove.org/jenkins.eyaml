@@ -27,6 +27,10 @@ jenkins::config_hash:
     value: '8080'
   JENKINS_AJP_PORT:
     value: '-1'
+  PREFIX:
+    value: '/test'
+  JENKINS_ARGS:
+    value: '--prefix=/test'
 
 # Standard jenkins configuration
 jenkins::auth: 'ldap'
