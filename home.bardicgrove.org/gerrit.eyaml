@@ -39,7 +39,7 @@ gerrit::override_options:
   gitweb:
     cgi: '/var/www/git/gitweb.cgi'
   httpd:
-    listenUrl: 'http://*:8080/r'
+    listenUrl: 'proxy-http://*:8080/r'
     maxQueued: '200'
   ldap:
     server: 'ldap://ldap.home.bardicgrove.org'
