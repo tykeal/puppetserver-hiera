@@ -68,13 +68,6 @@ hosts::localhost_aliases:
   - 'puppet.bardicgrove.org'
   - 'puppet'
 
-hosts::localhost6_alises:
-  - 'localhost'
-  - 'localhost6'
-  - 'localhost6.localdomain6'
-  - 'puppet.bardicgrove.org'
-  - 'puppet'
-
 # network configuration
 network::if_bridge:
   eno2:
