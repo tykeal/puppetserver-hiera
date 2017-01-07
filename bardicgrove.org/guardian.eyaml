@@ -69,7 +69,7 @@ hosts::localhost_aliases:
   - 'puppet'
 
 # Disable netfilter on bridges per libvirt docs
-systctl::base::values:
+sysctl::base::values:
   net.bridge.bridge-nf-call-ip6tables:
     value: 0
   net.bridge.bridge-nf-call-iptables:
