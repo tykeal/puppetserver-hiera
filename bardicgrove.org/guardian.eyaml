@@ -78,4 +78,8 @@ network::bridge:
   br0:
     ensure: 'up'
 
+custom_profiles:
+  # guardian acts as a libvirt system in addition to being puppetserver
+  - '::profile::libvirt::node'
+
 # vim: ts=2 sw=2 sts=2 et :
