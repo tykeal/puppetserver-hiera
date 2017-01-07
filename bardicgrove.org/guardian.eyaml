@@ -68,15 +68,6 @@ hosts::localhost_aliases:
   - 'puppet.bardicgrove.org'
   - 'puppet'
 
-# Disable netfilter on bridges per libvirt docs
-sysctl::base::values:
-  net.bridge.bridge-nf-call-ip6tables:
-    value: 0
-  net.bridge.bridge-nf-call-iptables:
-    value: 0
-  net.bridge.bridge-nf-call-arptables:
-    value: 0
-
 # network configuration
 network::if_bridge:
   eno2:
