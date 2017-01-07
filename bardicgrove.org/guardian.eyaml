@@ -57,4 +57,14 @@ rkhunter::allowdevfile:
   - '/dev/shm/sem.slapd-*.stats'
   - '/dev/shm/PostgreSQL.*'
 
+# network configuration
+network::if_bridge:
+  eno2:
+    ensure: 'up'
+    bridge: 'br0'
+
+network::bridge:
+  br0:
+    ensure: 'up'
+
 # vim: ts=2 sw=2 sts=2 et :
