@@ -57,6 +57,24 @@ rkhunter::allowdevfile:
   - '/dev/shm/sem.slapd-*.stats'
   - '/dev/shm/PostgreSQL.*'
 
+# hosts file configuration
+hosts::enable_ipv6_localhost: true
+
+# override the default localhost entries
+hosts::localhost_aliases:
+  - 'localhost'
+  - 'localhost4'
+  - 'localhost4.localdomain4'
+  - 'puppet.bardicgrove.org'
+  - 'puppet'
+
+hosts::localhost6_alises:
+  - 'localhost'
+  - 'localhost6'
+  - 'localhost6.localdomain6'
+  - 'puppet.bardicgrove.org'
+  - 'puppet'
+
 # network configuration
 network::if_bridge:
   eno2:
