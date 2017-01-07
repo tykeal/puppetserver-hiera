@@ -26,7 +26,7 @@ puppetdb::master::config::puppet_service_name: 'puppetserver'
 
 # configure puppet master settings here
 puppet::master:
-  reports: 'store,puppetdb'
+  reports: 'puppetdb,tagmail'
 
 # configure tagmail
 tagmail::conf:
