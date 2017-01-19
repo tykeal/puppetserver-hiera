@@ -12,7 +12,7 @@ nexus::revision: '01'
 nexus::download_site: 'http://download.sonatype.com/nexus/3'
 nexus::nexus_type: 'unix'
 # nexus::nexus_work_dir: '/srv/nexus-data'
-nexus::nexus_work_dir_manage: true
+nexus::nexus_work_dir_manage: false
 # nexus::nexus_data_folder: "%{hiera('nexus::nexus_work_dir')}"
 
 # testing that port gets properly changed
