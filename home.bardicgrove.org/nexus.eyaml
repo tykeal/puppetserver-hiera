@@ -15,4 +15,7 @@ nexus::nexus_type: 'unix'
 nexus::nexus_work_dir_manage: true
 # nexus::nexus_data_folder: "%{hiera('nexus::nexus_work_dir')}"
 
+# testing that port gets properly changed
+nexus::nexus_port: '8082'
+
 # vim: ts=2 sw=2 sts=2 et :
