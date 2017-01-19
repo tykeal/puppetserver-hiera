@@ -6,8 +6,8 @@ nginx::exporttag: 'home-lab'
 
 nginx::export::vhost: 'nexus-lab.home.bardicgrove.org'
 
-nexus::version: '3.0.2'
-nexus::revision: '02'
+nexus::version: '3.2.0'
+nexus::revision: '01'
 nexus::nexus_context: '/'
 nexus::download_site: 'http://download.sonatype.com/nexus/3'
 nexus::nexus_type: 'unix'
