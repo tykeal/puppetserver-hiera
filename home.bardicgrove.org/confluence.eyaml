@@ -7,8 +7,8 @@ role: role::confluence
 
 java::package: 'java-1.8.0-openjdk'
 
-confluence::version: '5.10.7'
-confluence::checksum: '6be537236e7ed20a2884031b2f819f8b'
+confluence::version: '6.0.4'
+confluence::checksum: '1daff08f6b8cfe8dc5ded4028cbfec90'
 # confluence module requires the java home be set
 confluence::javahome: '/usr/lib/jvm/jre'
 
