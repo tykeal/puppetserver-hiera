@@ -22,4 +22,10 @@ nginx::exporttag: 'home-lab'
 
 nginx::export::vhost: 'confluence-lab.home.bardicgrove.org'
 
+# not doing SSL proxying in lab
+confluence::tomcat_proxy:
+  scheme: 'http'
+  proxyName: "%{hiera('nginx::export::vhost')}"
+  proxyPort: '80'
+
 # vim: ts=2 sw=2 sts=2 et :
