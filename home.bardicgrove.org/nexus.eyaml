@@ -15,4 +15,7 @@ nexus::nexus_type: 'unix'
 nexus::nexus_work_dir_manage: false
 # nexus::nexus_data_folder: "%{hiera('nexus::nexus_work_dir')}"
 
+nexus::docker_ports:
+  - '5000'
+
 # vim: ts=2 sw=2 sts=2 et :
