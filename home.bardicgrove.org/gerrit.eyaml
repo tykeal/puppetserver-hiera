@@ -36,6 +36,7 @@ gerrit::override_options:
   gerrit:
     basePath: '/srv/gerrit'
     canonicalWebUrl: 'http://gerrit-lab.home.bardicgrove.org/r'
+    serverId: 'f88e09eb-1e32-4923-8041-0dc5a1bfd25b'
   gitweb:
     cgi: '/var/www/git/gitweb.cgi'
   httpd:
