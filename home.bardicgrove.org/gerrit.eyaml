@@ -16,7 +16,7 @@ gerrit::gitweb_package_name: 'git2u-gitweb'
 
 # what mysql db do we want to pick us up
 gerrit::db_tag: 'bardichome-db'
-gerrit::gerrit_version: '2.12.3'
+gerrit::gerrit_version: '2.13.6'
 
 gerrit::override_options:
   auth:
@@ -61,7 +61,9 @@ gerrit::override_options:
 gerrit::third_party_plugins:
   delete-project:
     # yamllint disable rule:line-length
-    plugin_source: 'https://gerrit-ci.gerritforge.com/view/Plugins-stable-2.12/job/plugin-delete-project-stable-2.12/lastSuccessfulBuild/artifact/buck-out/gen/plugins/delete-project/delete-project.jar'
+    plugin_source: 'https://gerrit-ci.gerritforge.com/view/Plugins-stable-2.13/job/plugin-delete-project-stable-2.13/lastSuccessfulBuild/artifact/buck-out/gen/plugins/delete-project/delete-project.jar'
+  importer:
+    plugin_source: 'https://gerrit-ci.gerritforge.com/view/Plugins-stable-2.13/job/plugin-importer-stable-2.13/lastSuccessfulBuild/artifact/buck-out/gen/plugins/importer/importer.jar'
     # yamllint enable
 
 gerrit::override_secure_options:
