@@ -1,0 +1,91 @@
+---
+
+role: role::gerrit
+
+# The resource collection tag to be used by our nginx system(s)
+nginx::exporttag: 'home-lab'
+
+# nginx::export_vhost: false
+
+# # nginx SSL information
+# nginx::ssl_cert_name: 'bardicgrove'
+# nginx::ssl_cert_chain: 'startcom_sub_class2'
+# nginx::ssl_dhparam: 'gerrit2kdhparam'
+#
+gerrit::gitweb_package_name: 'git2u-gitweb'
+
+# what mysql db do we want to pick us up
+gerrit::db_tag: 'bardichome-db'
+gerrit::gerrit_version: '2.14'
+
+gerrit::override_options:
+  auth:
+    type: 'LDAP'
+  cache:
+    directory: 'cache'
+  cache.web_sessions:
+    maxAge: '1mon'
+  database:
+    type: 'MYSQL'
+    hostname: 'mysql.home.bardicgrove.org'
+    database: 'gerrit2'
+    username: 'gerrit2'
+  gc:
+    startTime: 'Sun 03:15'
+    interval: '2 day'
+  gerrit:
+    basePath: '/srv/gerrit'
+    canonicalWebUrl: 'http://gerrit2-lab.home.bardicgrove.org/r'
+    serverId: 'f4df8591-042f-4a09-83d5-45ca963849d6'
+  gitweb:
+    cgi: '/var/www/git/gitweb.cgi'
+  httpd:
+    listenUrl: 'proxy-http://*:8080/r'
+    maxQueued: '200'
+  ldap:
+    # yamllint disable-line rule:line-length
+    server: ENC[GPG,hQEMA4i0Em3b1yILAQgAqJ7Dw2V6tYNBCa9uLF3gXJngsW059ViPw2jSGnUTHCZwkrxHNKsf4GTJRdOpQXMa1ZiSok5Qxja803QBK5P337Lm65Asy7ZzQdtio6SZTjCKxCdxPni+Qfhf0ciXUYS/B2RPqOeUKOlJ8kmSeutZK0LJGwGIcT6ZIpbJULs0+5DRj/Tzm7M3J6+ZQv6mwepURKJpn2dZz2qkY0g+HWtyfAObBkFqWojwQ9ks6iJzZeTq/U5JisQedJiE/12E7yIzUES56432WjanZ/XBpoqVHz484tawZyqhh2P3mtcnJPHQChfine/EiuN5615NrAEo7AyWHVt96iMmQeiBI8YAhIUCDAOVosJoWKQPaQEP/R0tih5L65DM4LQ8q/Lm6bcakGaFzNn+kP9Q88dpdjNz9xeGiFPHrjM6YEBZccrCECcb5qFSEEPxcX7Pi21lCRJafpQjrKNIJqK9vRp/EGGR3+hg02AVST5W6ZpzBnkEizt7Rou5YmOP4XaKM0U8+r95HwQTv+6OYoP+ZImuPc8RDZgun1wOVys4ZkOQukJCwAVpggahX8bDOjWYRGE5UcDS047xRPW1Q/3Bs4DtEUg/qxw5Xk2qHv4ub3xqxIn8XZSsy3daSceOq9UWUDefMnVgWUMqJ8HWxsIiLbXPJejNvb20c4aW4f8AIv3k9RKON6V6ZsFDe9bv3s1ZOn7H7xDH1uyQqp/cHoSR8iOEFqCf9yYrgudm8RQhwttaADxNW2V4fSnhG5figGqooufiVv15GMqiv18tNdkEyLo3CbM2DoQN7+ndRToDqqYZkXcHngqLgEo3YFFAmh5KPgzMxlqsFeEdCpt5atLjEhEZQqqh24IkGqYddL07/pzaklqtgmFnwYhvW2YQ0HqTNmJFS+qN+rbWLvT3kSiWVRRLRAueMr1XZcLLbZD2BtyrYfnpUWYTotkfG/fE/Msnjq8+fMj9vy4wC2hxtFGQKbSz2hthW/X+65oMX7c0DckRoj5h5KOSQuVeHWckQW9Mvhg4c7ft73MnfmckIOJH8gHcRwdz0mUBzDBt2w6Rvh1BpkC9xqO0LgqxiMVh6uROeuCh4tVFRiq/TTWnkSm7CBOR/EDl1UD1oJFIBR+UoNVlO7JDFI+tm+PQcGuA2UB7/fKEfhEuTagNMWjPYGCdTzu5vonM8XhtaxY7Cg==]
+    # yamllint disable-line rule:line-length
+    accountBase: ENC[GPG,hQEMA4i0Em3b1yILAQgAmawzNgm8V/Ej/jSfRgCP9ySpiKwsVba+HxdH4pLZcqmrqd4C/dk8a6Qv1FPAvvSM1aMO6xqN9UhSYj8pT0K/NrjWxJg6MxHfpm2DBe1WxD2I2581VVqoRAsx81DMBReb10PCNrVOFKaD4t4MI0qmPpgyCOEc/BcBlEep1GxtNnCjryuWbjC3GiXvsIuALzcZU7rJ66YIUPopFeow1z9OJegTwOdr0FCGsQS9I6B2Hue7C24v5jOj27NPLmpmH6HF43W3B9IVRHJNoGikKIDy80rnlW0b2UIWN1zids4ttp3GMgjTLaWwwNe3DfvcRA6ka/xD5nQWJ42N2CN17kirnYUCDAOVosJoWKQPaQEP/2OMj7qD/NlAC4xUr4yhRRTVF9GvMEubYY1xcuxO01A2ADxHJ4fqrRIMRmtacmzaWUw8RxaKRQGrDwjekL1ILaVn1+IpyXiI1aCBCkEPvVypmxRw9syMoOlVWt+n6QluBE2c2ji/aAIr22VYhNgSBukA+k2k+64mpFs3bRK4rHadID6mOZsyl54OOAbn/3sY7Uz2LORknthHhRoe3coXOLx496vXPWW8WmY9D/V6D8jGGWJQe+RkmufVNP8rcx5CQvg7AqHgN2guXVq4M3IqHFoJwBi9k/xucBZufONow7QewzqXq3wdmMnMtTc+GFksI4gCKxZZ3zW69QYMHC6cwZwkaV0z9UVfCU3FnB8HaSrb5TB6/ztGJL/4tk4lZYWsIR9YgIL+RmqAmtSgLmhroGMFgBFf/p7TWcWxtf2zA/WpCEi5tPwK4nevS/9Sd7y/BggRl7USeqeCpReksqjNJI7W+8r42bTgBMETX7p1DbrBcwgROiyxKSG1byIeKFmbj0HLsLvNrEh6myGLEr9bytDmTIdtusHze0BXdZeZ1Tu8HV1t/i3nSFsH3SbCg2E+pG4B9gaZ0WiSeUjCD1GlAIdlW5yN8MG7w8reAoOpRbEv+2e3Bym0k/cVNa75fpS1zRt/JE19sS//05ce2wRsDsCXmx3EDg/xcmr7Qyu2JugW0lgB1Q40ubzO71Sr5PyhOfb54W01j9j1eoW4WFfGbXRIDDKNz++gTBpy3BqloTQm62D1YoLd0XGv2CzAVGp4QPcjoXlafybZPbkLTfx1EXIFULhqlcjB0TLh]
+    # yamllint disable-line rule:line-length
+    accountPattern: '(&(objectClass=inetOrgPerson)(!(shadowExpire=0))(uid=${username}))'
+    accountFullName: '${cn}'
+    # yamllint disable-line rule:line-length
+    groupBase: ENC[GPG,hQEMA4i0Em3b1yILAQf/V0SAZ7at+evG7JOcYEISlx8WdFqIuIikwUYet787AOidixorV/oH2YkNiELuP/mLxovqXBqNy2lYLNJw9egxGj94wgxL5PliuOaozQRtADLMbost380ZJ0l5dUHagcmxp4nGWt9cBLuZOdAcu2t4miHDYQjy+R9LaY0rsK5Uc6B5foRkeDJP9Ou2gwozVg2rhK8kDwsxYFbYUzIEK+PxnWV5Hr4GJZA4ovoJXCYA1MB0PW8MjbLiaiHb62FkpN4LcTZmPHqv5MVQwySQkypc88Ky/xS7pH1iT0v1sn7GpmaOWBh9WZIY1rrum7ED/mR3NkNgieGmpFmwOW4OzULfLoUCDAOVosJoWKQPaQEQALsYn03LQBjFeyMbkcs/EjLqVKCSmPmdHphOZbWjUkoNgXrJdr5xwm8H4t7FsQGcP0ze9QkXQl9XTPrVzW0vXUpGsfO1Qo2xMUuM2sBGOszR38B0DoaMwoWE9wID84yGAdyPZVcdS/huWjOGtg97Ykq4+bgq0mQ0f8psgIvC9izQYmtVKY1LU+XwsFeRmrokd74zmIi+58gbN22roHJHe9jdKaV7UWf9CvbsTMQ5mkjyFHeYj3P8DJafPC/t0Yhtt/pbeXq9esA8DLfG/DZ5lgSA+NB+h0Du/1CcqfVnHrWGsKSgy+0kgEHlG4DvqhAHCGBPRjnsMU2tN4l8U+J9x3epQMK3jC7djGz6/0v4U+l7oYRfG76Y0m2Iqyur1IAV4djtrQW1tm00jvK1kZRPBqpJxngEwM8beAHdaU3dvEjWAFCmpLC5dN46wN2tSsA63a8oMa+/5cBVPpqc1FDiQxvnv+ntMQmeseAy/5w7stSf9zmOBNmoJyoNEWcv7eh7jnnjc7vPKvpA79cCG0ctuGFBfCPxEYxgjJXTniav0sbHEr6wkvbGMxbBvLUzLKfEzYFkOs99BJPdg/2IcpP5dqnli3wXa1TbhXON/E/gnHEMgU4PcrmEwIQlLL+2WZxJbUG+fz1zDjrt9M3WIuccUmzl2o+jcgsRdSe3qw6P+A640lkB0L+pUaTjUiqwn99hurdyrIyp2DBu2O+Yi/u0ckVI4lOftZ7fNO6tLPWXsJCTA2Sa0nKeE1FASTIglgktudk6YTQEYcK4EgcufvwM4TETdjJOmtigr8/V2Q==]
+    groupMemberPattern: '(member=${dn})'
+  sendemail:
+    smtpServer: 'localhost'
+    from: '${user} (Code Review) <gerrit@gerrit2.home.bardicgrove.org>'
+  sshd:
+    listenAddress: '*:29418'
+  user:
+    email: 'gerrit@gerrit.home.bardicgrove.org'
+  receive:
+    enableSignedPush: 'true'
+
+gerrit::override_secure_options:
+  database:
+    # yamllint disable-line rule:line-length
+    password: ENC[GPG,hQEMA4i0Em3b1yILAQf/RFqyFt08hM19rcXRobe5Kx1j+Hb6WxqgQkXsQu2NYWikF4COmyuCskcuicz0smDLurT9/6Q0jCYGELO9gNN1MU2LbBRp/IHxcunky8vk9bTLzfSaKJLyXZBJzlcwismquIJWzQedHgWJdKWhNpmZqiQdI5w9/9T0YfUq7/+ncO5Uvm58vRF0G5BgJ9O0ROwKsnXkUBwh77Vged85A3dJFwGs4vV4aFZeR8cUwZwkwP4kEgUDkrywS/3UUBRcAl1gRBBMSNvY0Oo5YOeEE+o+nXuGECyqzjonE9Rot70Lj6hhgSLOBUZi4wLIEUP9ByzDtlxOioqCq6UEY4jDrwv1j4UCDAOVosJoWKQPaQEQAKuw2EzeCnvkBsTRFmINqAxgtS5yGX0qb2EEwpQs4Pjo9saK8KQDpEbL2js7fDnkc13Z069WEv9+h9c7kqPWmtbJkYfDeL7Ylqp53qktDXVzqNYBoK8caCIgBq4TZ4PHUiCJt/tK6g7QTBJ3azOJv3ZR2vAVFXRprCD+RAQSGtQ+QABntgb2vvd9ntnwAppOAHkvXgyjSScqBQQDsza8SsfxNlZ7p4dhm6t8cgzg2HLri3wmOMgza5Z5kRJThWY6l8vhp6ilYYif5MNQQOlwEO3F3BumKQaaAgVUqOiIfNKR8Bd1HnQauqlBu9mrBBIJi9/tl598JSUWjH2nCogN70BznrlU5PYOgNoq6FdODv5BhYnbd1a8IW+klm/xNGEIPxyeFoUt4GnZ8Rny9rrfsbDsCeBiFrtJBfjYMCJ0hxM3to7x8HRDIIIW1enRQdxx5ZTSJD/ZAL75h/Az5R9NuXS350xF43aqh1f34Klz5jadCnVkX5VMXkRvrgC9WW1q2V1rwzeajYD7Aw/rYFZUCgwV0BEtJYwq4fdT+hQ8nC4+TVB7/PIfnvveivCL85iBpEAU09qpW6Vi4QsGrBITYs8lcf6747Po3VXS2DJAqfUCHImDacmAHTXo3dHjav9yBAHW9g25z1NkcGOiNAe/Qmc8NXIvrlnF+km+TKEVEDM00lsBL6g5JyOTnH+Ax8n4OwQsuw3G+GkIqpHCcMIV4XxrDWifRW/pjLF2bpa6OjK/+OnSt4v8++ZLFQjz8SFC7BII/UUdpwQ/3JkpM0OVZshJM7ZIQjQhtYr5KE5p]
+
+# push ssh known hosts
+ssh::known_hosts:
+  'github.com':
+    name: 'github.com'
+    host_aliases:
+      - 192.30.252.131
+    ensure: present
+    type: 'ssh-rsa'
+    # yamllint disable rule:line-length
+    key: 'AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ'
+    # yamllint enable
+
+# push ssh user configuration
+ssh::users_client_options:
+  gerrit:
+    user_home_dir: '/opt/gerrit'
+    options:
+      'Host github.com':
+        User: git
+
+# vim: ts=2 sw=2 sts=2 et :
