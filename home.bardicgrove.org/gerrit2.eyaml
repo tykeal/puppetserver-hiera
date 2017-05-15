@@ -21,6 +21,7 @@ gerrit::gerrit_version: '2.14'
 gerrit::override_options:
   auth:
     type: 'LDAP'
+    contributorAgreements: true
   cache:
     directory: 'cache'
   cache.web_sessions:
