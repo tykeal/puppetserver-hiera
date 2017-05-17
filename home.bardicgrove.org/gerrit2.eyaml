@@ -16,12 +16,11 @@ gerrit::gitweb_package_name: 'git2u-gitweb'
 
 # what mysql db do we want to pick us up
 gerrit::db_tag: 'bardichome-db'
-gerrit::gerrit_version: '2.14'
+gerrit::gerrit_version: '2.12.7'
 
 gerrit::override_options:
   auth:
     type: 'LDAP'
-    contributorAgreements: true
   cache:
     directory: 'cache'
   cache.web_sessions:
@@ -68,6 +67,14 @@ gerrit::override_secure_options:
   database:
     # yamllint disable-line rule:line-length
     password: ENC[GPG,hQEMA4i0Em3b1yILAQf/RFqyFt08hM19rcXRobe5Kx1j+Hb6WxqgQkXsQu2NYWikF4COmyuCskcuicz0smDLurT9/6Q0jCYGELO9gNN1MU2LbBRp/IHxcunky8vk9bTLzfSaKJLyXZBJzlcwismquIJWzQedHgWJdKWhNpmZqiQdI5w9/9T0YfUq7/+ncO5Uvm58vRF0G5BgJ9O0ROwKsnXkUBwh77Vged85A3dJFwGs4vV4aFZeR8cUwZwkwP4kEgUDkrywS/3UUBRcAl1gRBBMSNvY0Oo5YOeEE+o+nXuGECyqzjonE9Rot70Lj6hhgSLOBUZi4wLIEUP9ByzDtlxOioqCq6UEY4jDrwv1j4UCDAOVosJoWKQPaQEQAKuw2EzeCnvkBsTRFmINqAxgtS5yGX0qb2EEwpQs4Pjo9saK8KQDpEbL2js7fDnkc13Z069WEv9+h9c7kqPWmtbJkYfDeL7Ylqp53qktDXVzqNYBoK8caCIgBq4TZ4PHUiCJt/tK6g7QTBJ3azOJv3ZR2vAVFXRprCD+RAQSGtQ+QABntgb2vvd9ntnwAppOAHkvXgyjSScqBQQDsza8SsfxNlZ7p4dhm6t8cgzg2HLri3wmOMgza5Z5kRJThWY6l8vhp6ilYYif5MNQQOlwEO3F3BumKQaaAgVUqOiIfNKR8Bd1HnQauqlBu9mrBBIJi9/tl598JSUWjH2nCogN70BznrlU5PYOgNoq6FdODv5BhYnbd1a8IW+klm/xNGEIPxyeFoUt4GnZ8Rny9rrfsbDsCeBiFrtJBfjYMCJ0hxM3to7x8HRDIIIW1enRQdxx5ZTSJD/ZAL75h/Az5R9NuXS350xF43aqh1f34Klz5jadCnVkX5VMXkRvrgC9WW1q2V1rwzeajYD7Aw/rYFZUCgwV0BEtJYwq4fdT+hQ8nC4+TVB7/PIfnvveivCL85iBpEAU09qpW6Vi4QsGrBITYs8lcf6747Po3VXS2DJAqfUCHImDacmAHTXo3dHjav9yBAHW9g25z1NkcGOiNAe/Qmc8NXIvrlnF+km+TKEVEDM00lsBL6g5JyOTnH+Ax8n4OwQsuw3G+GkIqpHCcMIV4XxrDWifRW/pjLF2bpa6OjK/+OnSt4v8++ZLFQjz8SFC7BII/UUdpwQ/3JkpM0OVZshJM7ZIQjQhtYr5KE5p]
+
+gerrit::third_party_plugins:
+  delete-project:
+    # yamllint disable-line rule:line-length
+    plugin_source: 'https://gerrit-ci.gerritforge.com/view/Plugins-stable-2.12/job/plugin-delete-project-stable-2.12/lastSuccessfulBuild/artifact/buck-out/gen/plugins/delete-project/delete-project.jar'
+  importer:
+    # yamllint disable-line rule:line-length
+    plugin_source: 'https://gerrit-ci.gerritforge.com/view/Plugins-stable-2.12/job/plugin-importer-stable-2.12/lastSuccessfulBuild/artifact/buck-out/gen/plugins/importer/importer.jar'
 
 # push ssh known hosts
 ssh::known_hosts:
