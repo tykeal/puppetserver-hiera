@@ -8,7 +8,7 @@ nginx::export::vhost: 'nexus-lab.home.bardicgrove.org'
 
 nexus::deploy_pro: true
 nexus::version: '2.14.3'
-nexus::revision: '02'
+nexus::revision: '03'
 nexus::nexus_context: '/'
 # nexus::nexus_work_recurse: false
 
