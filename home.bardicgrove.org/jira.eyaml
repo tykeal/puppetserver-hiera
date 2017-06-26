@@ -19,6 +19,9 @@ jira::dbpassword: ENC[GPG,hQEMA4i0Em3b1yILAQf+NTRLgQJGdQaWRJxCwbadf8VW2G94oCsTw2
 jira::dbname: jira
 jira::dbport: 3306
 
+# force different check java script
+jira::script_check_java_manage: true
+
 jira::dbserver: mysql.home.bardicgrove.org
 
 # Tomcat configuration
