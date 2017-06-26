@@ -21,6 +21,7 @@ jira::dbport: 3306
 
 # force different check java script
 jira::script_check_java_manage: true
+jira::script_check_java_template: 'profile/jira/check-java.sh.erb'
 
 jira::dbserver: mysql.home.bardicgrove.org
 
