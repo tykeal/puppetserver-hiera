@@ -2,6 +2,9 @@
 
 role: '::role::jira'
 
+# nginx bits
+nginx::exporttag: 'home-lab'
+
 # What DB to pick up our configuration
 jira::dbtag: bardichome-db
 
@@ -30,5 +33,11 @@ jira::javahome: /usr/lib/jvm/jre
 
 # mysql connector
 jira::mysql_connector_version: 5.1.36
+
+# Reverse proxy setup
+jira::proxy:
+  scheme: http
+  proxyName: jira-lab.home.bardicgrove.org
+  proxyPort: 80
 
 # vim: ts=2 sw=2 sts=2 et :
