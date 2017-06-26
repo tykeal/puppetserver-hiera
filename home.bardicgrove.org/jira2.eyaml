@@ -1,0 +1,43 @@
+---
+
+role: '::role::jira'
+
+# nginx bits
+nginx::exporttag: 'home-lab'
+
+# What DB to pick up our configuration
+jira::dbtag: bardichome-db
+
+# jira base settings
+jira::version: '7.3.0'
+java::package: 'java-1.8.0-openjdk'
+
+# jira db settings
+jira::db: mysql
+jira::dbtype: mysql
+jira::dbdriver: com.mysql.jdbc.Driver
+jira::dbuser: jira2
+# yamllint disable-line rule:line-length
+jira::dbpassword: ENC[GPG,hQEMA4i0Em3b1yILAQgAkIqfrko7hC4PwqPC9pmFBCuMsVHHiUC2xRjHpMQqcbEPac3CX+PE99p/3OJnBMJwSOCE+yc6oVe2HAFU0q3ICzyjqWFY/zFGwi42NkC+eYptv8zSQV9C+kv/UXlK/h51mVBh9hDe/kSo80EWja1rEcwPgNtd07o9DSHkvc7BVhQ3NICG/foTE3Kt6OBW71h+ruYVpvo7iu7/ZTklm0IZZRnQZjMNKZryiRwNHMIO13VoBofQcDK+AC3bUKKQilrFVW5YyIFHvv24d/hK52HXHjwShslmWzkNiBpDcaDnbEgl+qcM0NyRfbvH7R/NxL4kZ1DCe8ZD4O+Se4Xw2YASsoUCDAOVosJoWKQPaQEQAIBPGrEq8YQH/nBXt5YFOcgCIbOIXtgGBQqnVjdXq3T4c24jMq0AjTZE1sv55ae2i+ICVO9JfRitc7KFCgUiz90GKZ/thRM7n/Hi0ND6qstYcrI6/bqt/eUnpxEPMrm/jttVlYeUektkrMMOuhdIx8uCEJJ189L3LiAS6/jDpFfdca74WLWkSX+mrhIVk7aAJG963pF2w5qW9dBPqyNF5U9iXj+xMv3p98vy+/B3Ee7phEgP3aLX96/2GEH5u6XSCkzJxumavoELDBYGw1uym/O0G2rTLje9/y10NBpPm9r14P7H0OUb6K7Px99VvTxVlbPyJTEpo/Yeon1539UNFBFE6mq1GZO/e6GMGKKpGTD5VqMpP+7lDrl6zC/I60a2fh0VHdUPmgSkeCk8zW+uJROtEzgjU8Qs5xilhGhpG2bQBwUgoY/j/LNotNzwJ1IiEL6cmZ9thhtx1W93g2CfW4SbgsfvEGeT+9dMHZZgXGfVWqCSPr2evr90x4FRkzbXe+RptRTrcZj2ROcJiibxmgqZF/Qo7cyDwQgjVdBaRyYzT2q1hUJJXqKD4Y9Xyab/HsJ4v4nhNWuUfcDfG/5HkfP9VA1h+q+c74mltUYpOrsedJ7MBCz/hejDI+pczXktyJz9pGqlCL0EfjB/mwxL1v3q/wutmi2URwHSj5XgwCOD0lMBbwtoTWJllUDK1YcmVPN4Dpl65gVZfenVlW2DiaJL6C06lHiwzMumdPqATH/agOgGCnPAwNR8CdSrPTuwgxgbICW7XQAMqvxM1qRa7rZJ+yVLZA==]
+jira::dbname: jira2
+jira::dbport: 3306
+
+# force different check java script
+jira::script_check_java_manage: true
+jira::script_check_java_template: 'profile/jira/check-java.sh.erb'
+
+jira::dbserver: mysql.home.bardicgrove.org
+
+# Tomcat configuration
+jira::javahome: /usr/lib/jvm/jre
+
+# mysql connector
+jira::mysql_connector_version: 5.1.36
+
+# Reverse proxy setup
+jira::proxy:
+  scheme: http
+  proxyName: jira2-lab.home.bardicgrove.org
+  proxyPort: 80
+
+# vim: ts=2 sw=2 sts=2 et :
