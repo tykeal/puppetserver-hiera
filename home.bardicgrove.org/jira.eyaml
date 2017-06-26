@@ -1,0 +1,30 @@
+---
+
+role: '::role::jira'
+
+# What DB to pick up our configuration
+jira::dbtag: bardichome-db
+
+# jira base settings
+jira::version: '7.3.0'
+java::package: 'java-1.8.0-openjdk'
+
+# jira db settings
+jira::db: mysql
+jira::dbtype: mysql
+jira::dbdriver: com.mysql.jdbc.Driver
+jira::dbuser: jira
+# yamllint disable-line rule:line-length
+jira::dbpassword: ENC[GPG,hQEMA4i0Em3b1yILAQf+NTRLgQJGdQaWRJxCwbadf8VW2G94oCsTw2kVJUM0NQRjVmRdfN/bufuMHhG/NofRB01IW3UM5ld6UfkfYds9ANIGdpSHveAR0KRcOOX4w+2sNOFHg5qpkUP+NB6JWwtAx1cbBJqd3fb3gkGHLdeFfOCjluDO44U+boy2xGqUu9FaigdrwnXRUN0M4sIh3yZ7QTEl357QxVs4IBF5pW4muHSnHfA0suTGO0qO4rI8o6RsMbOhi95HPn9xSh6qHGtkeJlNNJMBeJ+XvOTJKtU0fJyTFL1INXn/Q/Xv4lMaEIboPAq/MTi1Zj6lXtxScxx/uhvpCuzhKFq3Vl3SdNC6n4UCDAOVosJoWKQPaQEP/1m71hrgB61tPK2HSiTK0AnUFz3jXSe/LHgbaUmssyuTh6R3nlX7TD7zPMdnWjquU/+CYL7ggLa3hKHuynSP8oYlnr1sERyo4DG9wIz910T7TtI5WpQZn4Zw00PANEZ8QY2jt7ZAGJbHGMIYdDAX8q/YDefH8iBncerbUG1imnCMDfHomMKzuJy2vx9Ntk8aQn03QYftO0Jy6qq7TlppIYGSKF9bQPDZPX+dBQTrZWSir1UwOpmLb86cFZOgI9d8qkYOVLeLlqU/wV7+9NQacpxGHxm02gN6a1KdCuYOXvnyqOrdq9u2yhZNZfgMVMllY8/J6h16GUX7Q6TLuPQb3o0Gz4GFUvWAFLJnkDnYXem+a2Bg0xEt3GAzERx7yxVp7KqqlPuIJuk9Q+mKT29UTC5iQexxM3OmTd2Pqna3cX1fT/N8LsJgnjyQnZPMxm+QfpAiUvBKIkpCSvz19WPYK6mOAXkcitTfxzUX/20XuTTzU4ftUwrMWztD/DS13V0zslLlxX+LdOy9gaRFAoYI6r8DWemFcOajwEmJ+yXNzTHbnWkXWBukmzNHk+b3VKg4RNvlPKy6yBgChKq4lBAQWnP3L9bLlvxwT8S0qSN2dEtCA97bxZDaMhaOgqySrQ2iTHBuJcUxBZINe85o5edgRPE+weR6Ewji49QjhVLbyvHt0lMBk7Z8qY0J+0KT8zg7YJDczVtoQo/8APZDZ9KufGFcU5f0cOrC803JruGnaxbzsrIQbi6tayIx/hZ7wkQx85JFZev58Pkw/aUePqJ8Z2juOpOTmw==]
+jira::dbname: jira
+jira::dbport: 3306
+
+jira::dbserver: mysql.home.bardicgrove.org
+
+# Tomcat configuration
+jira::javahome: /usr/lib/jvm/jre
+
+# mysql connector
+jira::mysql_connector_version: 5.1.36
+
+# vim: ts=2 sw=2 sts=2 et :
