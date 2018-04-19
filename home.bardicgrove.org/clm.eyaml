@@ -5,6 +5,7 @@ nginx::exporttag: 'home-lab'
 
 nginx::export::vhost: 'clm-lab.home.bardicgrove.org'
 
+clm::export_nginx: true
 clm::use_revision: true
 clm::revision: '01'
 clm::version: 1.41.0
