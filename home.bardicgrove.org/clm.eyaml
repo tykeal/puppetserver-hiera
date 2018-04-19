@@ -8,13 +8,51 @@ nginx::export::vhost: 'clm-lab.home.bardicgrove.org'
 clm::export_nginx: true
 clm::use_revision: true
 clm::revision: '01'
-clm::version: 1.45.0
+clm::version: 1.41.0
 clm::sitename: 'clm-lab.home.bardicgrove.org'
 # Set to true during initial bring up, switch to false after
 clm::work_dir_recurse: false
 
 # CLM 1.45 requires an extra key
+# clm::clm_config:
+#   'consentToUpgradeToVersion_1_45': true
+
+# config for 1.41.0
+# Do not merge configs, use only this one
+clm::merge_with_default_config: false
 clm::clm_config:
-  'consentToUpgradeToVersion_1_45': true
+  sonatypeWork: '/srv/clm-server'
+  http:
+    port: '8070'
+    adminPort: '8071'
+    requestLog:
+      console:
+        enabled: false
+      file:
+        enabled: true
+        currentLogFilename: /var/log/clm-server/request.log
+        archivedLogFilename: /var/log/clm-server-%d.log.gz
+        archivedFileCount: 5
+  logging:
+    level: DEBUG
+    loggers:
+      com.sonatype.insight.scan: INFO
+      eu.medsea.mimeutil.MimeUtil2: INFO
+      org.apache.http: INFO
+      org.apache.http.wire: ERROR
+      org.eclipse.birt.report.engine.layout.pdf.font.FontConfigReader: WARN
+      org.eclipse.jetty: INFO
+      org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter: INFO
+      console:
+        enabled: true
+        threshold: INFO
+        logFormat: "%d{'yyyy-MM-dd HH:mm:ss,SSSZ'} %level [%thread] %logger - %msg%n"
+      file:
+        enabled: true
+        threshold: ALL
+        currentLogFilename: /var/log/clm-server/clm-server.log
+        archivedLogFilenamePattern: /var/log/clm-server/clm-server-%d.log.gz
+        archivedFileCount: 5
+        logFormat: "%d{'yyyy-MM-dd HH:mm:ss,SSSZ'} %level [%thread] %logger - %msg%n"
 
 # vim: ts=2 sw=2 sts=2 et :
