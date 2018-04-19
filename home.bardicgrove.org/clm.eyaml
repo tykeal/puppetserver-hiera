@@ -21,7 +21,7 @@ clm::work_dir_recurse: false
 # Do not merge configs, use only this one
 clm::merge_with_default_config: false
 clm::clm_config:
-  sonatypeWork: '/srv/clm-server'
+  sonatypeWork: "/srv/clm-server"
   http:
     port: '8070'
     adminPort: '8071'
@@ -30,9 +30,9 @@ clm::clm_config:
         enabled: false
       file:
         enabled: true
-        currentLogFilename: /var/log/clm-server/request.log
-        archivedLogFilename: /var/log/clm-server-%d.log.gz
-        archivedFileCount: 5
+        currentLogFilename: "/var/log/clm-server/request.log"
+        archivedLogFilenamePattern: "/var/log/clm-server/request-%d.log.gz"
+        archivedFileCount: '5'
   logging:
     level: DEBUG
     loggers:
@@ -43,16 +43,16 @@ clm::clm_config:
       org.eclipse.birt.report.engine.layout.pdf.font.FontConfigReader: WARN
       org.eclipse.jetty: INFO
       org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter: INFO
-      console:
-        enabled: true
-        threshold: INFO
-        logFormat: "%d{'yyyy-MM-dd HH:mm:ss,SSSZ'} %level [%thread] %logger - %msg%n"
-      file:
-        enabled: true
-        threshold: ALL
-        currentLogFilename: /var/log/clm-server/clm-server.log
-        archivedLogFilenamePattern: /var/log/clm-server/clm-server-%d.log.gz
-        archivedFileCount: 5
-        logFormat: "%d{'yyyy-MM-dd HH:mm:ss,SSSZ'} %level [%thread] %logger - %msg%n"
+    console:
+      enabled: true
+      threshold: INFO
+      logFormat: "%d{'yyyy-MM-dd HH:mm:ss,SSSZ'} %level [%thread] %logger - %msg%n"
+    file:
+      enabled: true
+      threshold: ALL
+      currentLogFilename: "/var/log/clm-server/clm-server.log"
+      archivedLogFilenamePattern: "/var/log/clm-server/clm-server-%d.log.gz"
+      archivedFileCount: '5'
+      logFormat: "%d{'yyyy-MM-dd HH:mm:ss,SSSZ'} %level [%thread] %logger - %msg%n"
 
 # vim: ts=2 sw=2 sts=2 et :
