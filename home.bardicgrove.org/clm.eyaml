@@ -8,9 +8,13 @@ nginx::export::vhost: 'clm-lab.home.bardicgrove.org'
 clm::export_nginx: true
 clm::use_revision: true
 clm::revision: '01'
-clm::version: 1.44.0
+clm::version: 1.45.0
 clm::sitename: 'clm-lab.home.bardicgrove.org'
 # Set to true during initial bring up, switch to false after
 clm::work_dir_recurse: false
+
+# CLM 1.45 requires an extra key
+clm::clm_config:
+  'consentToUpgradeToVersion_1_45': true
 
 # vim: ts=2 sw=2 sts=2 et :
