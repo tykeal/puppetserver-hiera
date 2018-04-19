@@ -1,0 +1,15 @@
+---
+role: role::clm
+
+nginx::exporttag: 'home-lab'
+
+nginx::export::vhost: 'clm-lab.home.bardicgrove.org'
+
+clm::use_revision: true
+clm::revision: '01'
+clm::version: 1.41.0
+clm::sitename: 'clm-lab.home.bardicgrove.org'
+# Set to true during initial bring up, switch to false after
+clm::work_dir_recurse: true
+
+# vim: ts=2 sw=2 sts=2 et :
