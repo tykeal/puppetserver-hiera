@@ -28,9 +28,6 @@ gerrit::override_options:
     maxAge: '1mon'
   container:
     javaHome: '/usr/lib/jvm/jre'
-    javaOptions:
-      - '-Dflogger.backend_factory=com.google.common.flogger.backend.log4j.Log4jBackendFactory#getInstance'
-      - '-Dflogger.logging_context=com.google.gerrit.server.logging.LoggingContext#getInstance'
     user: gerrit
   gc:
     startTime: 'Sun 03:15'
