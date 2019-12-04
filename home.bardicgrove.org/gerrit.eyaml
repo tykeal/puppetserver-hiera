@@ -21,15 +21,17 @@ gerrit::gerrit_version: '3.0.4'
 gerrit::override_options:
   auth:
     type: 'LDAP'
+    gitBasicAuthPolicy: 'HTTP'
   cache:
     directory: 'cache'
   cache.web_sessions:
     maxAge: '1mon'
-  database:
-    type: 'MYSQL'
-    hostname: 'mysql.home.bardicgrove.org'
-    database: 'gerrit'
-    username: 'gerrit'
+  container:
+    javaHome: '/usr/lib/jvm/jre'
+    javaOptions:
+      - '"-Dflogger.backend_factory=com.google.common.flogger.backend.log4j.Log4jBackendFactory#getInstance"'
+      - '"-Dflogger.logging_context=com.google.gerrit.server.logging.LoggingContext#getInstance"'
+    user: gerrit
   gc:
     startTime: 'Sun 03:15'
     interval: '2 day'
