@@ -16,7 +16,7 @@ gerrit::gitweb_package_name: 'git2u-gitweb'
 
 # what mysql db do we want to pick us up
 gerrit::db_tag: 'bardichome-db'
-gerrit::gerrit_version: '3.0.4'
+gerrit::gerrit_version: '3.1.0'
 
 gerrit::override_options:
   auth:
