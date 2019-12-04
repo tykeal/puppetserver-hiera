@@ -49,6 +49,14 @@ gerrit::override_options:
     accountFullName: '${cn}'
     groupBase: 'ou=Groups,dc=bardicgrove,dc=org'
     groupMemberPattern: '(member=${dn})'
+  noteDb.changes:
+    autoMigrate: 'false'
+    trial: 'false'
+    write: 'true'
+    read: 'true'
+    sequence: 'true'
+    primaryStorage: 'note db'
+    disableReviewDb: 'true'
   sendemail:
     smtpServer: 'localhost'
     from: '${user} (Code Review) <gerrit@gerrit.home.bardicgrove.org>'
