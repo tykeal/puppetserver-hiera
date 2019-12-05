@@ -15,7 +15,6 @@ nginx::exporttag: 'home-lab'
 gerrit::gitweb_package_name: 'git2u-gitweb'
 
 # what mysql db do we want to pick us up
-gerrit::db_tag: 'bardichome-db'
 gerrit::gerrit_version: '3.1.0'
 
 gerrit::override_options:
@@ -65,14 +64,6 @@ gerrit::override_options:
     email: 'gerrit@gerrit.home.bardicgrove.org'
   receive:
     enableSignedPush: 'true'
-
-# gerrit::third_party_plugins:
-#   delete-project:
-# yamllint disable rule:line-length
-#     plugin_source: 'https://gerrit-ci.gerritforge.com/view/Plugins-stable-2.13/job/plugin-delete-project-stable-2.13/lastSuccessfulBuild/artifact/buck-out/gen/plugins/delete-project/delete-project.jar'
-#   importer:
-#     plugin_source: 'https://gerrit-ci.gerritforge.com/view/Plugins-stable-2.13/job/plugin-importer-stable-2.13/lastSuccessfulBuild/artifact/buck-out/gen/plugins/importer/importer.jar'
-# yamllint enable
 
 # push ssh known hosts
 ssh::known_hosts:
