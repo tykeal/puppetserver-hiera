@@ -52,6 +52,8 @@ nginx::config::vhost_purge: true
 # by default
 nsswitch::sudoers: 'files'
 
+ius::ius_baseurl: 'https://repo.ius.io/7/$basearch/'
+
 # default option tree for saz-ssh
 
 # sshd_config
