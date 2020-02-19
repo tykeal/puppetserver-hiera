@@ -31,6 +31,8 @@ jenkins::config_hash:
     value: '/test'
   JENKINS_ARGS:
     value: '--prefix=/test'
+  CASC_JENKINS_CONFIG:
+    value: '/var/lib/jenkins/casc.d/'
 
 # Standard jenkins configuration
 jenkins::auth: 'ldap'
