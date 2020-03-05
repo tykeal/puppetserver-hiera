@@ -45,6 +45,7 @@ jenkins::casc:
       standard:
         excludeClientIPFromCrumb: false
     disableRememberMe: false
+    numExecutors: 0
 
 # Standard jenkins configuration
 jenkins::auth: 'ldap'
