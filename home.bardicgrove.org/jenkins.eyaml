@@ -34,6 +34,9 @@ jenkins::config_hash:
   CASC_JENKINS_CONFIG:
     value: '/var/lib/jenkins/casc.d/'
 
+# Start using Jenkins Configuration as Code (CasC)
+jenkins::use_casc: true
+
 # Standard jenkins configuration
 jenkins::auth: 'ldap'
 jenkins::ldap:
