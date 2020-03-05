@@ -36,6 +36,15 @@ jenkins::config_hash:
 
 # Start using Jenkins Configuration as Code (CasC)
 jenkins::use_casc: true
+jenkins::casc:
+  jenkins:
+    agentProtocols:
+      - "JNLP4-connect"
+      - "Ping"
+    crumbIssuer:
+      standard:
+        excludeClientIPFromCrumb: false
+    disableRememberMe: false
 
 # Standard jenkins configuration
 jenkins::auth: 'ldap'
