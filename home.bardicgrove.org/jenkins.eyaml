@@ -47,7 +47,7 @@ jenkins::casc:
     disableRememberMe: false
     numExecutors: 0
 
-jenkins::casc_securityrealm:
+jenkins::casc_securityrealm_old:
   jenkins:
     securityRealm:
       # yamllint disable rule:line-length
