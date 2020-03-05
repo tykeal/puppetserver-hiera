@@ -13,6 +13,30 @@ sudo::configs:
   wheel:
     content: '%wheel ALL=(ALL) ALL'
 
+# jenkins base casc defaults
+jenkins::casc_jenkins_defaults:
+  agentProtocols:
+    - "JNLP4-connect"
+    - "Ping"
+  crumbIssuer:
+    standard:
+      excludeClientIPFromCrumb: false
+  disableRememberMe: false
+  numExecutors: 0
+
+jenkins::casc_security_defaults:
+  apiToken:
+    creationOfLegacyTokenEnabled: false
+    tokenGenerationOnCreationEnabled: false
+    usageStatisticsEnabled: true
+  sSHD:
+    port: -1
+
+jenkins::casc_unclassified_defaults:
+  mailer:
+    charset: "UTF-8"
+    useSsl: false
+
 # manage "common user" accounts
 users_common:
   tykeal:
