@@ -36,48 +36,44 @@ jenkins::config_hash:
 
 # Start using Jenkins Configuration as Code (CasC)
 jenkins::use_casc: true
-# jenkins::casc_jenkins:
-#  numExecutors: 1
-
-jenkins::casc_securityrealm_old:
-  jenkins:
-    securityRealm:
-      # yamllint disable rule:line-length
-      saml:
-        binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
-        displayNameAttributeName: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
-        emailAttributeName: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
-        groupsAttributeName: "http://schemas.xmlsoap.org/claims/Group"
-        idpMetadataConfiguration:
-          period: 0
-          xml: |-
-            <EntityDescriptor entityID="urn:bardicgrove.auth0.com" xmlns="urn:oasis:names:tc:SAML:2.0:metadata">
-              <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
-                <KeyDescriptor use="signing">
-                  <KeyInfo xmlns="http://www.w3.org/2000/09/xmldsig#">
-                    <X509Data>
-                      <X509Certificate>MIIDBTCCAe2gAwIBAgIJa3nqH/ZOmfEkMA0GCSqGSIb3DQEBCwUAMCAxHjAcBgNVBAMTFWJhcmRpY2dyb3ZlLmF1dGgwLmNvbTAeFw0yMDAyMjEyMDE0NDlaFw0zMzEwMzAyMDE0NDlaMCAxHjAcBgNVBAMTFWJhcmRpY2dyb3ZlLmF1dGgwLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAOakhGlJytJxFfPL5Ic/GDp8+1uXGOFFx4PlQgDM/fF6tWnmG3Ei+exSRWi43bQ7FO5egAhpLlIRz0rgg5KoLnxmelCzCWLxsPvEbBRPMHE0ApsOOVrwq3IAeLd1UyWtpQb/LlYeFDBItbmSJC/ZU7C6bRLkQ9ClfBDZWYoimVETESG/0n0M4OnNBqY27a/SYN+2JKf0Gcna676axTZ26tpgmmTJ7YJr7/lBC8PXSjr/rR3RxpIHeZWmZAqQx9lI4Sp2Ee5yp+bOiD1ENeElvqGL76oYqlWje58letlPaUpbaAnNFp4vXZl/vN0+9P5X0Rv9mtloJnn6w+DwoHO3dwcCAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUmaHzJKMX4yuJLfFY1IBrsCYumQYwDgYDVR0PAQH/BAQDAgKEMA0GCSqGSIb3DQEBCwUAA4IBAQBBWpNjM55QxLv5opbFgQ+2xBOo7YzBH6tQ4BE4h09L2UtzkNZ2FOoMHNS8YApQtpycE5uoXZ3R5eFj7gjPs0ruphodQAEf1D1hRx905IiCaFxniLbYHKIgIE5E+tdJQjUbfJ9du1P8+KhAPVQBQxtbAiBY1aCUDUdeaMLgm9fSTIJtDCcte4r7nMaJBfpQB5Lz4zMdoA3G569gAdv4ebpHmgVu1WqHIvXdWxX7S65/UmGvxjrnPd7qp/E5IYp1JmTT++LY11D8aM0GWp1yGEe5vk5fLFBYf31brqPIfmMzIUvAukPi7hG4jRpQoqUTcBNSqrqT0NGih4CwOJMdb51i</X509Certificate>
-                    </X509Data>
-                  </KeyInfo>
-                </KeyDescriptor>
-                <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://bardicgrove.auth0.com/samlp/OG6LHf0KvW012AeSuJQ1OLXd60bjfIOO/logout"/>
-                <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://bardicgrove.auth0.com/samlp/OG6LHf0KvW012AeSuJQ1OLXd60bjfIOO/logout"/>
-                <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</NameIDFormat>
-                <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</NameIDFormat>
-                <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
-                <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://bardicgrove.auth0.com/samlp/OG6LHf0KvW012AeSuJQ1OLXd60bjfIOO"/>
-                <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://bardicgrove.auth0.com/samlp/OG6LHf0KvW012AeSuJQ1OLXd60bjfIOO"/>
-                <Attribute Name="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" FriendlyName="E-Mail Address" xmlns="urn:oasis:names:tc:SAML:2.0:assertion"/>
-                <Attribute Name="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" FriendlyName="Given Name" xmlns="urn:oasis:names:tc:SAML:2.0:assertion"/>
-                <Attribute Name="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" FriendlyName="Name" xmlns="urn:oasis:names:tc:SAML:2.0:assertion"/>
-                <Attribute Name="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" FriendlyName="Surname" xmlns="urn:oasis:names:tc:SAML:2.0:assertion"/>
-                <Attribute Name="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" FriendlyName="Name ID" xmlns="urn:oasis:names:tc:SAML:2.0:assertion"/>
-              </IDPSSODescriptor>
-            </EntityDescriptor>
-        maximumAuthenticationLifetime: 7200
-        usernameAttributeName: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
-        usernameCaseConversion: "none"
-        # yamllint enable
+jenkins::casc_jenkins:
+  securityRealm:
+    # yamllint disable rule:line-length
+    saml:
+      binding: "urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+      displayNameAttributeName: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"
+      emailAttributeName: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"
+      groupsAttributeName: "http://schemas.xmlsoap.org/claims/Group"
+      idpMetadataConfiguration:
+        period: 0
+        xml: |-
+          <EntityDescriptor entityID="urn:bardicgrove.auth0.com" xmlns="urn:oasis:names:tc:SAML:2.0:metadata">
+            <IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+              <KeyDescriptor use="signing">
+                <KeyInfo xmlns="http://www.w3.org/2000/09/xmldsig#">
+                  <X509Data>
+                    <X509Certificate>MIIDBTCCAe2gAwIBAgIJa3nqH/ZOmfEkMA0GCSqGSIb3DQEBCwUAMCAxHjAcBgNVBAMTFWJhcmRpY2dyb3ZlLmF1dGgwLmNvbTAeFw0yMDAyMjEyMDE0NDlaFw0zMzEwMzAyMDE0NDlaMCAxHjAcBgNVBAMTFWJhcmRpY2dyb3ZlLmF1dGgwLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAOakhGlJytJxFfPL5Ic/GDp8+1uXGOFFx4PlQgDM/fF6tWnmG3Ei+exSRWi43bQ7FO5egAhpLlIRz0rgg5KoLnxmelCzCWLxsPvEbBRPMHE0ApsOOVrwq3IAeLd1UyWtpQb/LlYeFDBItbmSJC/ZU7C6bRLkQ9ClfBDZWYoimVETESG/0n0M4OnNBqY27a/SYN+2JKf0Gcna676axTZ26tpgmmTJ7YJr7/lBC8PXSjr/rR3RxpIHeZWmZAqQx9lI4Sp2Ee5yp+bOiD1ENeElvqGL76oYqlWje58letlPaUpbaAnNFp4vXZl/vN0+9P5X0Rv9mtloJnn6w+DwoHO3dwcCAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUmaHzJKMX4yuJLfFY1IBrsCYumQYwDgYDVR0PAQH/BAQDAgKEMA0GCSqGSIb3DQEBCwUAA4IBAQBBWpNjM55QxLv5opbFgQ+2xBOo7YzBH6tQ4BE4h09L2UtzkNZ2FOoMHNS8YApQtpycE5uoXZ3R5eFj7gjPs0ruphodQAEf1D1hRx905IiCaFxniLbYHKIgIE5E+tdJQjUbfJ9du1P8+KhAPVQBQxtbAiBY1aCUDUdeaMLgm9fSTIJtDCcte4r7nMaJBfpQB5Lz4zMdoA3G569gAdv4ebpHmgVu1WqHIvXdWxX7S65/UmGvxjrnPd7qp/E5IYp1JmTT++LY11D8aM0GWp1yGEe5vk5fLFBYf31brqPIfmMzIUvAukPi7hG4jRpQoqUTcBNSqrqT0NGih4CwOJMdb51i</X509Certificate>
+                  </X509Data>
+                </KeyInfo>
+              </KeyDescriptor>
+              <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://bardicgrove.auth0.com/samlp/OG6LHf0KvW012AeSuJQ1OLXd60bjfIOO/logout"/>
+              <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://bardicgrove.auth0.com/samlp/OG6LHf0KvW012AeSuJQ1OLXd60bjfIOO/logout"/>
+              <NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</NameIDFormat>
+              <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:persistent</NameIDFormat>
+              <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
+              <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://bardicgrove.auth0.com/samlp/OG6LHf0KvW012AeSuJQ1OLXd60bjfIOO"/>
+              <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://bardicgrove.auth0.com/samlp/OG6LHf0KvW012AeSuJQ1OLXd60bjfIOO"/>
+              <Attribute Name="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" FriendlyName="E-Mail Address" xmlns="urn:oasis:names:tc:SAML:2.0:assertion"/>
+              <Attribute Name="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" FriendlyName="Given Name" xmlns="urn:oasis:names:tc:SAML:2.0:assertion"/>
+              <Attribute Name="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" FriendlyName="Name" xmlns="urn:oasis:names:tc:SAML:2.0:assertion"/>
+              <Attribute Name="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" FriendlyName="Surname" xmlns="urn:oasis:names:tc:SAML:2.0:assertion"/>
+              <Attribute Name="http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri" FriendlyName="Name ID" xmlns="urn:oasis:names:tc:SAML:2.0:assertion"/>
+            </IDPSSODescriptor>
+          </EntityDescriptor>
+      maximumAuthenticationLifetime: 7200
+      usernameAttributeName: "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
+      usernameCaseConversion: "none"
+      # yamllint enable
 
 # Standard jenkins configuration
 jenkins::auth: 'ldap'
