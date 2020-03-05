@@ -36,8 +36,8 @@ jenkins::config_hash:
 
 # Start using Jenkins Configuration as Code (CasC)
 jenkins::use_casc: true
-jenkins::casc_jenkins:
-  numExecutors: 1
+# jenkins::casc_jenkins:
+#  numExecutors: 1
 
 jenkins::casc_securityrealm_old:
   jenkins:
