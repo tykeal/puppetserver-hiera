@@ -12,7 +12,7 @@ nginx::exporttag: 'home-lab'
 # nginx::ssl_cert_chain: 'startcom_sub_class2'
 # nginx::ssl_dhparam: 'gerrit2kdhparam'
 #
-gerrit::gitweb_package_name: 'git2u-gitweb'
+gerrit::gitweb_package_name: 'git216-gitweb'
 
 #java::package: 'java-11-openjdk'
 

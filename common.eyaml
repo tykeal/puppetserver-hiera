@@ -26,7 +26,7 @@ python::virtualenv: present
 python::dev: present
 
 # force IUS version of git globally
-git::package_name: 'git2u'
+git::package_name: 'git216'
 
 # common hosts config
 hosts::enable_ipv6_localhost: false
