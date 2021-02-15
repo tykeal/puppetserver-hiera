@@ -14,7 +14,7 @@ nginx::exporttag: 'home-lab'
 #
 gerrit::gitweb_package_name: 'git216-gitweb'
 
-#java::package: 'java-11-openjdk'
+java::package: 'java-11-openjdk'
 
 # what mysql db do we want to pick us up
 gerrit::gerrit_version: '3.2.3'
