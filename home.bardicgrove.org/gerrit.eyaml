@@ -19,7 +19,7 @@ java::java_alternative: 'java-11-openjdk.x86_64'
 java::java_alternative_path: '/usr/lib/jvm/java-11-openjdk-11.0.10.0.9-0.el7_9.x86_64/bin/java'
 
 # what mysql db do we want to pick us up
-gerrit::gerrit_version: '3.2.3'
+gerrit::gerrit_version: '3.3.2'
 
 gerrit::override_options:
   auth:
